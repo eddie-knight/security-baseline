@@ -76,28 +76,6 @@ criteria:
     scorecard_probe:
       - # None yet
 
-  - id: OSPS-AC-02
-    maturity_level: 1
-    category: Access Control
-    criterion: |
-      The project's version control system MUST
-      restrict collaborator permissions to the
-      lowest available privileges by default.
-    rationale: |
-      Reduce the risk of unauthorized access to
-      the project's repository by limiting the
-      permissions granted to collaborators.
-    details: |
-      Configure the project's version control
-      system to assign the lowest available
-      permissions to collaborators by default when
-      added, granting additional permissions only
-      when necessary.
-    control_mappings: # TODO
-    security_insights_value: # TODO
-    scorecard_probe:
-      - # None yet
-
   - id: OSPS-AC-03
     maturity_level: 1
     category: Access Control

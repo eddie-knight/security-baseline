@@ -70,7 +70,7 @@ For more information on the project and to make contributions, visit the [GitHub
 {{ if .ControlMappings }}
 **Control Mappings:**
 {{ range $key, $value := .ControlMappings }}
-- {{ $key }}: {{ $value }}
+- {{ $key | addLinks }}: {{ $value }}
 {{- end }}
 {{- end }}
 {{ if .SecurityInsightsValue }}
@@ -88,6 +88,18 @@ For more information on the project and to make contributions, visit the [GitHub
 ### {{ .Term }}
 
 {{ .Definition }}
+{{ if .Synonyms }}
+{{- $length := len .Synonyms -}}
+**Synonyms:** _{{- range $index, $synonym := .Synonyms -}}{{ $synonym }}{{- if lt $index (subtract $length 1) }}, {{ end -}}
+{{- end -}}_
+{{- end }}
+
+{{ if .References }}
+**References:**
+{{ range .References }}
+- {{.}}
+{{- end }}
+{{- end }}
 
 {{- end }}
 ---

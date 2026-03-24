@@ -1,0 +1,382 @@
+title: OSPS Baseline to 800-161
+metadata:
+  id: osps-to-800-161
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and 800-161.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: 800-161
+    title: NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations
+    version: r1-upd1
+    url: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-161r1-upd1.pdf
+    description: "This publication provides guidance to organizations on identifying, assessing, and mitigating cybersecurity risks throughout the supply chain at all levels of their organizations. The publication integrates cybersecurity supply chain risk management (C-SCRM) into risk management activities by applying a multilevel, C-SCRM-specific approach, including guidance on the development of C-SCRM strategy implementation plans, C-SCRM policies, C-SCRM plans, and risk assessments for products and services."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: 800-161
+  entry-type: Guideline
+mappings:
+- id: osps-to-800-161-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: AC-4(21)
+  - entry-id: AC-17
+  - entry-id: CM-5
+  - entry-id: CM-6
+  - entry-id: IA-2
+  - entry-id: IA-5
+  - entry-id: 1.2e
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-800-161-009
+  source: OSPS-AC-02
+  targets:
+  - entry-id: AC-2
+  - entry-id: AC-3
+  - entry-id: AC-4(21)
+  - entry-id: AC-5
+  - entry-id: AC-6
+  - entry-id: CM-5
+  - entry-id: CM-7
+  relationship: relates-to
+- id: osps-to-800-161-016
+  source: OSPS-AC-03
+  targets:
+  - entry-id: AC-3
+  - entry-id: AC-5
+  - entry-id: CM-3
+  - entry-id: CM-3(2)
+  - entry-id: CM-5
+  relationship: relates-to
+- id: osps-to-800-161-021
+  source: OSPS-AC-04
+  targets:
+  - entry-id: AC-3(8)
+  - entry-id: AC-4
+  - entry-id: AC-4(6)
+  - entry-id: AC-6
+  - entry-id: AC-20
+  - entry-id: AC-20(1)
+  - entry-id: CM-5
+  - entry-id: CM-7
+  relationship: relates-to
+- id: osps-to-800-161-029
+  source: OSPS-BR-01
+  targets:
+  - entry-id: AC-3
+  - entry-id: AC-4
+  - entry-id: AC-4(21)
+  - entry-id: CM-5
+  - entry-id: CM-7
+  - entry-id: SI-7
+  relationship: relates-to
+- id: osps-to-800-161-035
+  source: OSPS-BR-02
+  targets:
+  - entry-id: IA-4
+  - entry-id: SA-15
+  - entry-id: SI-7
+  - entry-id: SR-4
+  relationship: relates-to
+- id: osps-to-800-161-039
+  source: OSPS-BR-03
+  targets:
+  - entry-id: AC-4
+  - entry-id: AC-4(21)
+  relationship: relates-to
+- id: osps-to-800-161-041
+  source: OSPS-BR-04
+  targets:
+  - entry-id: AU-2
+  - entry-id: AU-6
+  - entry-id: AU-10
+  - entry-id: CM-5
+  - entry-id: CM-6
+  - entry-id: MA-1
+  - entry-id: MA-8
+  - entry-id: SI-4
+  - entry-id: SI-5
+  relationship: relates-to
+- id: osps-to-800-161-050
+  source: OSPS-BR-05
+  targets:
+  - entry-id: AC-4
+  - entry-id: CM-2
+  - entry-id: CM-7(4)
+  - entry-id: CM-7(5)
+  - entry-id: RA-5
+  - entry-id: SA-15
+  - entry-id: SR-3
+  relationship: relates-to
+- id: osps-to-800-161-057
+  source: OSPS-BR-06
+  targets:
+  - entry-id: AU-10
+  - entry-id: MP-1
+  - entry-id: SA-15
+  - entry-id: SI-7
+  - entry-id: SI-7(14)
+  relationship: relates-to
+- id: osps-to-800-161-062
+  source: OSPS-DO-01
+  targets:
+  - entry-id: CM-2
+  - entry-id: PL-2
+  - entry-id: PL-8
+  - entry-id: SA-15
+  relationship: relates-to
+- id: osps-to-800-161-066
+  source: OSPS-DO-02
+  targets:
+  - entry-id: IR-6
+  - entry-id: SI-4
+  - entry-id: SI-5
+  relationship: relates-to
+- id: osps-to-800-161-069
+  source: OSPS-DO-03
+  targets:
+  - entry-id: CM-2
+  - entry-id: IR-1
+  - entry-id: MP-1
+  - entry-id: SA-15
+  - entry-id: SI-7
+  - entry-id: SI-7(14)
+  relationship: relates-to
+- id: osps-to-800-161-075
+  source: OSPS-DO-04
+  targets:
+  - entry-id: PL-1
+  - entry-id: PL-2
+  - entry-id: SI-4
+  relationship: relates-to
+- id: osps-to-800-161-078
+  source: OSPS-DO-05
+  targets:
+  - entry-id: PL-1
+  - entry-id: PL-2
+  - entry-id: SI-4
+  - entry-id: SI-5
+  relationship: relates-to
+- id: osps-to-800-161-082
+  source: OSPS-DO-06
+  targets:
+  - entry-id: CA-7
+  - entry-id: CM-7(5)
+  - entry-id: CM-8
+  - entry-id: PM-30
+  - entry-id: RA-3(1)
+  - entry-id: SA-11
+  - entry-id: SI-4
+  - entry-id: SR-3
+  - entry-id: SR-5
+  - entry-id: SR-6
+  - entry-id: SR-7
+  relationship: relates-to
+- id: osps-to-800-161-093
+  source: OSPS-GV-01
+  targets:
+  - entry-id: AC-2
+  - entry-id: AC-3
+  - entry-id: IA-2
+  - entry-id: PL-1
+  - entry-id: PL-4
+  - entry-id: PM-30
+  relationship: relates-to
+- id: osps-to-800-161-099
+  source: OSPS-GV-02
+  targets:
+  - entry-id: AC-21
+  - entry-id: AU-6
+  - entry-id: PL-1
+  relationship: relates-to
+- id: osps-to-800-161-102
+  source: OSPS-GV-03
+  targets:
+  - entry-id: AC-3
+  - entry-id: AC-20
+  - entry-id: PL-1
+  relationship: relates-to
+- id: osps-to-800-161-105
+  source: OSPS-GV-04
+  targets:
+  - entry-id: AC-2
+  - entry-id: AC-3
+  - entry-id: AC-4(21)
+  - entry-id: AC-5
+  - entry-id: AC-6
+  - entry-id: AC-20
+  - entry-id: CM-7
+  - entry-id: IR-4(6)
+  - entry-id: PM-30
+  - entry-id: SI-4
+  relationship: relates-to
+- id: osps-to-800-161-115
+  source: OSPS-LE-01
+  targets:
+  - entry-id: PL-4
+  relationship: relates-to
+- id: osps-to-800-161-116
+  source: OSPS-LE-02
+  targets:
+  - entry-id: PL-4
+  relationship: relates-to
+- id: osps-to-800-161-117
+  source: OSPS-LE-03
+  targets:
+  - entry-id: PL-4
+  relationship: relates-to
+- id: osps-to-800-161-118
+  source: OSPS-QA-01
+  targets:
+  - entry-id: RA-5
+  - entry-id: SA-11
+  - entry-id: SA-15
+  relationship: relates-to
+- id: osps-to-800-161-121
+  source: OSPS-QA-02
+  targets:
+  - entry-id: CA-7
+  - entry-id: CM-2
+  - entry-id: CM-8
+  - entry-id: PL-8
+  - entry-id: RA-3(1)
+  - entry-id: RA-5
+  - entry-id: SA-11
+  - entry-id: SA-15
+  - entry-id: SR-3
+  - entry-id: SR-4
+  relationship: relates-to
+- id: osps-to-800-161-131
+  source: OSPS-QA-03
+  targets:
+  - entry-id: AU-6
+  - entry-id: CM-3
+  - entry-id: CM-6
+  - entry-id: PL-8
+  - entry-id: SA-11
+  - entry-id: SA-15
+  - entry-id: SR-3
+  relationship: relates-to
+- id: osps-to-800-161-138
+  source: OSPS-QA-04
+  targets:
+  - entry-id: PL-8
+  - entry-id: SA-15
+  relationship: relates-to
+- id: osps-to-800-161-140
+  source: OSPS-QA-05
+  targets:
+  - entry-id: PL-8
+  - entry-id: SA-15
+  - entry-id: SR-3
+  relationship: relates-to
+- id: osps-to-800-161-143
+  source: OSPS-QA-06
+  targets:
+  - entry-id: SA-11
+  - entry-id: SA-15
+  - entry-id: SR-3
+  relationship: relates-to
+- id: osps-to-800-161-146
+  source: OSPS-QA-07
+  targets:
+  - entry-id: AC-5
+  - entry-id: AU-6
+  - entry-id: PL-8
+  - entry-id: SA-15
+  - entry-id: SR-3
+  relationship: relates-to
+- id: osps-to-800-161-151
+  source: OSPS-SA-01
+  targets:
+  - entry-id: CM-2
+  - entry-id: PL-8
+  - entry-id: RA-3
+  - entry-id: SA-15
+  relationship: relates-to
+- id: osps-to-800-161-155
+  source: OSPS-SA-02
+  targets:
+  - entry-id: CM-2
+  - entry-id: PL-2
+  - entry-id: PL-8
+  - entry-id: RA-3
+  - entry-id: SA-15
+  relationship: relates-to
+- id: osps-to-800-161-160
+  source: OSPS-SA-03
+  targets:
+  - entry-id: CA-2
+  - entry-id: CA-2(3)
+  - entry-id: PM-30
+  - entry-id: RA-3
+  - entry-id: SA-11
+  - entry-id: SA-15
+  - entry-id: SA-15(3)
+  - entry-id: SA-15(8)
+  - entry-id: SI-3
+  - entry-id: SR-3
+  - entry-id: SR-3(3)
+  - entry-id: SR-6
+  - entry-id: SR-7
+  relationship: relates-to
+- id: osps-to-800-161-173
+  source: OSPS-VM-01
+  targets:
+  - entry-id: IR-1
+  - entry-id: IR-4
+  - entry-id: IR-6
+  - entry-id: IR-7(1)
+  - entry-id: IR-8
+  - entry-id: SI-2
+  relationship: relates-to
+- id: osps-to-800-161-179
+  source: OSPS-VM-02
+  targets:
+  - entry-id: IR-1
+  - entry-id: IR-4
+  - entry-id: IR-6
+  - entry-id: IR-8
+  relationship: relates-to
+- id: osps-to-800-161-183
+  source: OSPS-VM-03
+  targets:
+  - entry-id: IR-6
+  relationship: relates-to
+- id: osps-to-800-161-184
+  source: OSPS-VM-04
+  targets:
+  - entry-id: CA-7
+  - entry-id: CM-3
+  - entry-id: CM-8
+  - entry-id: IR-5
+  - entry-id: SI-2
+  - entry-id: SI-4
+  - entry-id: SI-5
+  relationship: relates-to
+- id: osps-to-800-161-191
+  source: OSPS-VM-05
+  targets:
+  - entry-id: CA-7
+  - entry-id: RA-5
+  - entry-id: SA-11
+  - entry-id: SI-2
+  - entry-id: SI-3
+  relationship: relates-to
+- id: osps-to-800-161-196
+  source: OSPS-VM-06
+  targets:
+  - entry-id: CA-7
+  - entry-id: RA-5
+  - entry-id: SA-11
+  - entry-id: SI-2
+  - entry-id: SI-3
+  relationship: relates-to

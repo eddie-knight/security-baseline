@@ -1,0 +1,162 @@
+title: OSPS Baseline to NIST Cybersecurity Framework
+metadata:
+  id: osps-to-csf
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and NIST Cybersecurity Framework.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: CSF
+    title: NIST Cybersecurity Framework
+    version: 2.0
+    url: https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf
+    description: "The NIST Cybersecurity Framework (CSF) 2.0 provides guidance to industry, government agencies, and other organizations to manage cybersecurity risks. It offers a taxonomy of high level cybersecurity outcomes that can be used by any organization — regardless of its size, sector, or maturity — to better understand, assess, prioritize, and communicate its cybersecurity efforts. The CSF does not prescribe how outcomes should be achieved. Rather, it links to online resources that provide additional guidance on practices and controls that could be used to achieve those outcomes."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: CSF
+  entry-type: Guideline
+mappings:
+- id: osps-to-csf-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: PR.A-02
+  - entry-id: PR.A-05
+  relationship: relates-to
+- id: osps-to-csf-003
+  source: OSPS-AC-02
+  targets:
+  - entry-id: PR.AA-02
+  - entry-id: PR.AA-05
+  relationship: relates-to
+- id: osps-to-csf-005
+  source: OSPS-AC-03
+  targets:
+  - entry-id: PR.A-02
+  - entry-id: PR.A-05
+  relationship: relates-to
+- id: osps-to-csf-007
+  source: OSPS-AC-04
+  targets:
+  - entry-id: PR.AA-02
+  - entry-id: PR.AA-05
+  relationship: relates-to
+- id: osps-to-csf-009
+  source: OSPS-BR-01
+  targets:
+  - entry-id: PR.AA-02
+  relationship: relates-to
+- id: osps-to-csf-010
+  source: OSPS-DO-01
+  targets:
+  - entry-id: GV.OC-04
+  - entry-id: GV.OC-05
+  relationship: relates-to
+- id: osps-to-csf-012
+  source: OSPS-DO-02
+  targets:
+  - entry-id: RS.MA-02
+  - entry-id: GV.RM-05
+  relationship: relates-to
+- id: osps-to-csf-014
+  source: OSPS-GV-04
+  targets:
+  - entry-id: PR.AA-02
+  - entry-id: PR.AA-05
+  relationship: relates-to
+- id: osps-to-csf-016
+  source: OSPS-LE-02
+  targets:
+  - entry-id: GV.OC-03
+  relationship: relates-to
+- id: osps-to-csf-017
+  source: OSPS-QA-01
+  targets:
+  - entry-id: ID.AM-02
+  - entry-id: ID.RA-01
+  - entry-id: ID.RA-08
+  relationship: relates-to
+- id: osps-to-csf-020
+  source: OSPS-QA-02
+  targets:
+  - entry-id: ID.AM.01
+  - entry-id: ID.AM-02
+  relationship: relates-to
+- id: osps-to-csf-022
+  source: OSPS-QA-03
+  targets:
+  - entry-id: ID.IM-02
+  relationship: relates-to
+- id: osps-to-csf-023
+  source: OSPS-QA-06
+  targets:
+  - entry-id: ID.AM-02
+  relationship: relates-to
+- id: osps-to-csf-024
+  source: OSPS-SA-01
+  targets:
+  - entry-id: ID.AM-02
+  relationship: relates-to
+- id: osps-to-csf-025
+  source: OSPS-SA-02
+  targets:
+  - entry-id: GV.OC-05
+  - entry-id: ID.AM-01
+  relationship: relates-to
+- id: osps-to-csf-027
+  source: OSPS-SA-03
+  targets:
+  - entry-id: ID.RA-01
+  - entry-id: ID.RA-04
+  - entry-id: ID.RA-05
+  - entry-id: DE.AE-07
+  relationship: relates-to
+- id: osps-to-csf-031
+  source: OSPS-VM-01
+  targets:
+  - entry-id: GV.PO-01
+  - entry-id: GV.PO-02
+  - entry-id: ID.RA-01
+  - entry-id: ID.RA-08
+  relationship: relates-to
+- id: osps-to-csf-035
+  source: OSPS-VM-02
+  targets:
+  - entry-id: GV.PO-01
+  - entry-id: GV.PO-02
+  - entry-id: ID.RA-01
+  relationship: relates-to
+- id: osps-to-csf-038
+  source: OSPS-VM-04
+  targets:
+  - entry-id: ID.RA-01
+  relationship: relates-to
+- id: osps-to-csf-039
+  source: OSPS-VM-05
+  targets:
+  - entry-id: GV.RM-05
+  - entry-id: GV.RM-06
+  - entry-id: GV.PO-01
+  - entry-id: GV.PO-02
+  - entry-id: ID.RA-01
+  - entry-id: ID.RA-08
+  - entry-id: ID.IM-02
+  relationship: relates-to
+- id: osps-to-csf-046
+  source: OSPS-VM-06
+  targets:
+  - entry-id: GV.RM-05
+  - entry-id: GV.RM-06
+  - entry-id: GV.PO-01
+  - entry-id: GV.PO-02
+  - entry-id: ID.RA-01
+  - entry-id: ID.RA-08
+  - entry-id: ID.IM-02
+  relationship: relates-to

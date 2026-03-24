@@ -1,0 +1,32 @@
+title: OSPS Baseline to CISA Secure by Design Pledge
+metadata:
+  id: osps-to-csbdp
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and CISA Secure by Design Pledge.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: CSbDP
+    title: CISA Secure by Design Pledge
+    version: 2024-05-08
+    url: https://www.cisa.gov/sites/default/files/2024-05/CISA%20Secure%20by%20Design%20Pledge_508c.pdf
+    description: "A voluntary pledge focused on seven goals to work towards, in addition to context and example approaches to achieve the goal and demonstrate measurable progress within enterprise software products and services."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: CSbDP
+  entry-type: Guideline
+mappings:
+- id: osps-to-csbdp-001
+  source: OSPS-PLACEHOLDER
+  targets:
+  - entry-id: PLACEHOLDER
+  relationship: relates-to
+  remarks: Placeholder mapping; real entries pending.

@@ -1,0 +1,172 @@
+title: OSPS Baseline to BSI TR-03185-2 Secure Software Lifecycle for Open Source Software
+metadata:
+  id: osps-to-bsi-tr-03185-2
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and BSI TR-03185-2 Secure Software Lifecycle for
+    Open Source Software.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: BSI-TR-03185-2
+    title: BSI TR-03185-2 Secure Software Lifecycle for Open Source Software
+    version: v1.1.0
+    url: https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03185/BSI-TR-03185-2.pdf?__blob=publicationFile&v=5
+    description: "Secure software is essential for the use of IT products in governments, businesses and societies."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: BSI-TR-03185-2
+  entry-type: Guideline
+mappings:
+- id: osps-to-bsi-tr-03185-2-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: GV.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-002
+  source: OSPS-AC-02
+  targets:
+  - entry-id: GV.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-003
+  source: OSPS-AC-03
+  targets:
+  - entry-id: GV.02
+  - entry-id: QA.06
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-005
+  source: OSPS-BR-02
+  targets:
+  - entry-id: BR.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-006
+  source: OSPS-BR-03
+  targets:
+  - entry-id: BR.03
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-007
+  source: OSPS-BR-04
+  targets:
+  - entry-id: BR.04
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-008
+  source: OSPS-BR-06
+  targets:
+  - entry-id: BR.03
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-009
+  source: OSPS-DO-01
+  targets:
+  - entry-id: BR.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-010
+  source: OSPS-DO-02
+  targets:
+  - entry-id: QA.03
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-011
+  source: OSPS-DO-03
+  targets:
+  - entry-id: BR.01
+  - entry-id: BR.03
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-013
+  source: OSPS-DO-04
+  targets:
+  - entry-id: DE.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-014
+  source: OSPS-DO-05
+  targets:
+  - entry-id: DE.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-015
+  source: OSPS-DO-06
+  targets:
+  - entry-id: QA.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-016
+  source: OSPS-GV-02
+  targets:
+  - entry-id: QA.03
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-017
+  source: OSPS-GV-03
+  targets:
+  - entry-id: GV.01
+  - entry-id: QA.04
+  - entry-id: QA.05
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-020
+  source: OSPS-LE-02
+  targets:
+  - entry-id: LE.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-021
+  source: OSPS-LE-03
+  targets:
+  - entry-id: LE.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-022
+  source: OSPS-QA-01
+  targets:
+  - entry-id: QA.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-023
+  source: OSPS-QA-02
+  targets:
+  - entry-id: QA.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-024
+  source: OSPS-QA-03
+  targets:
+  - entry-id: QA.04
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-025
+  source: OSPS-QA-05
+  targets:
+  - entry-id: BR.05
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-026
+  source: OSPS-QA-06
+  targets:
+  - entry-id: QA.04
+  - entry-id: QA.05
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-028
+  source: OSPS-QA-07
+  targets:
+  - entry-id: QA.06
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-029
+  source: OSPS-VM-01
+  targets:
+  - entry-id: VM.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-030
+  source: OSPS-VM-02
+  targets:
+  - entry-id: VM.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-031
+  source: OSPS-VM-03
+  targets:
+  - entry-id: VM.01
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-032
+  source: OSPS-VM-04
+  targets:
+  - entry-id: VM.02
+  relationship: relates-to
+- id: osps-to-bsi-tr-03185-2-033
+  source: OSPS-VM-06
+  targets:
+  - entry-id: QA.05
+  relationship: relates-to

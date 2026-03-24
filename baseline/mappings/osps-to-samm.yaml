@@ -1,0 +1,146 @@
+title: OSPS Baseline to OWASP Software Assurance Maturity Model
+metadata:
+  id: osps-to-samm
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and OWASP Software Assurance Maturity Model.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: SAMM
+    title: OWASP Software Assurance Maturity Model
+    version: 2.0
+    url: https://owaspsamm.org/model/
+    description: "The mission of OWASP Software Assurance Maturity Model (SAMM) is to be the prime maturity model for software assurance that provides an effective and measurable way for all types of organizations to analyze and improve their software security posture. OWASP SAMM supports the complete software lifecycle, including development and acquisition, and is technology and process agnostic. It is intentionally built to be evolutive and risk-driven in nature."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: SAMM
+  entry-type: Guideline
+mappings:
+- id: osps-to-samm-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: Operations -Environment Management -Configuration Hardening Lvl1
+  relationship: relates-to
+- id: osps-to-samm-002
+  source: OSPS-AC-04
+  targets:
+  - entry-id: Operations -Environment Management -Configuration Hardening Lvl1
+  relationship: relates-to
+- id: osps-to-samm-003
+  source: OSPS-BR-05
+  targets:
+  - entry-id: Implementation -Secure Build -Build Process Lvl2
+  relationship: relates-to
+- id: osps-to-samm-004
+  source: OSPS-BR-06
+  targets:
+  - entry-id: Implementation -Secure Deployment -Deployment Process Lvl3
+  relationship: relates-to
+- id: osps-to-samm-005
+  source: OSPS-DO-02
+  targets:
+  - entry-id: Implementation -Defect Management -Defect Tracking Lvl1
+  - entry-id: Implementation -Defect Management -Defect Tracking Lvl2
+  relationship: relates-to
+- id: osps-to-samm-007
+  source: OSPS-DO-04
+  targets:
+  - entry-id: Operations -Operational Management -System Decommissioning -Legacy Management Lvl1
+  relationship: relates-to
+- id: osps-to-samm-008
+  source: OSPS-DO-05
+  targets:
+  - entry-id: Operations -Operational Management -System Decommissioning -Legacy Management Lvl1
+  - entry-id: Operations -Operational Management -System Decommissioning -Legacy Management Lvl2
+  relationship: relates-to
+- id: osps-to-samm-010
+  source: OSPS-DO-06
+  targets:
+  - entry-id: Design -Security Requirements -Supplier Security Lvl2
+  relationship: relates-to
+- id: osps-to-samm-011
+  source: OSPS-QA-01
+  targets:
+  - entry-id: Implementation -Secure Build -Build Process Lvl1
+  relationship: relates-to
+- id: osps-to-samm-012
+  source: OSPS-QA-02
+  targets:
+  - entry-id: Implementation -Secure Build -Software Dependencies Lvl1
+  relationship: relates-to
+- id: osps-to-samm-013
+  source: OSPS-QA-03
+  targets:
+  - entry-id: Implementation -Secure Build -Build Process Lvl3
+  - entry-id: Implementation -Secure Build -Software Dependencies Lvl3
+  - entry-id: Verification -Requirements Testing -Control Verification Lvl1
+  - entry-id: Verification -Requirements Testing -Control Verification Lvl2
+  - entry-id: Verification -Requirements Testing -Control Verification Lvl3
+  relationship: relates-to
+- id: osps-to-samm-018
+  source: OSPS-QA-06
+  targets:
+  - entry-id: Verification-Requirements -Testing -Control Verification Lvl1
+  - entry-id: Verification-Requirements -Testing -Control Verification Lvl2
+  - entry-id: Verification-Requirements -Testing -Control Verification Lvl3
+  - entry-id: Verification -Security Testing -Scalable Baseline Lvl3
+  relationship: relates-to
+- id: osps-to-samm-022
+  source: OSPS-SA-01
+  targets:
+  - entry-id: Operations -Operational Management -Data Protection Lvl2
+  relationship: relates-to
+- id: osps-to-samm-023
+  source: OSPS-SA-03
+  targets:
+  - entry-id: Governance -Create and Promote Lvl1
+  - entry-id: Design -Threat Assessment -Application Risk Profile Lvl1
+  - entry-id: Design -Threat Assessment -Threat Modeling Lvl1
+  - entry-id: Verification -Architecture Assessment -Architecture Mitigation Lvl2
+  relationship: relates-to
+- id: osps-to-samm-027
+  source: OSPS-VM-01
+  targets:
+  - entry-id: Governance -Create and Promote Lvl2
+  - entry-id: Governance -Policy & Compliance -Policy & Standards Lvl1
+  - entry-id: Implementation -Defect Management -Defect Tracking Lvl1
+  - entry-id: Implementation -Defect Management -Defect Tracking Lvl2
+  - entry-id: Implementation -Defect Management -Defect Tracking Lvl3
+  - entry-id: Operations -Incident Management -Incident Response Lvl1
+  - entry-id: Operations -Incident Management -Incident Response Lvl2
+  - entry-id: Operations -Incident Management -Incident Response Lvl3
+  relationship: relates-to
+- id: osps-to-samm-035
+  source: OSPS-VM-02
+  targets:
+  - entry-id: Governance -Policy&Compliance -Policy&Standards Lvl2
+  relationship: relates-to
+- id: osps-to-samm-036
+  source: OSPS-VM-03
+  targets:
+  - entry-id: Operations -Incident Management -Incident Response Lvl3
+  relationship: relates-to
+- id: osps-to-samm-037
+  source: OSPS-VM-05
+  targets:
+  - entry-id: Implementation -Secure Build-Build Process Lvl3
+  - entry-id: Implementation -Software Dependencies Lvl3
+  - entry-id: Verification -Security Testing -Scalable Baseline Lvl1
+  - entry-id: Verification -Security Testing -Scalable Baseline Lvl3
+  relationship: relates-to
+- id: osps-to-samm-041
+  source: OSPS-VM-06
+  targets:
+  - entry-id: Implementation -Secure Build-Build Process Lvl3
+  - entry-id: Implementation -Software Dependencies Lvl3
+  - entry-id: Verification -Security Testing -Scalable Baseline Lvl1
+  - entry-id: Verification -Security Testing -Scalable Baseline Lvl3
+  relationship: relates-to

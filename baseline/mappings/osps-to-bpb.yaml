@@ -1,0 +1,231 @@
+title: OSPS Baseline to OpenSSF Best Practices Badge
+metadata:
+  id: osps-to-bpb
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and OpenSSF Best Practices Badge.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: BPB
+    title: OpenSSF Best Practices Badge
+    version: 2024
+    url: https://github.com/coreinfrastructure/best-practices-badge/blob/main/criteria/criteria.yml
+    description: "The Open Source Security Foundation (OpenSSF) Best Practices Badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The OpenSSF Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and, as a result, are more likely to produce higher-quality secure software."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: BPB
+  entry-type: Guideline
+mappings:
+- id: osps-to-bpb-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: CC-G-1
+  relationship: relates-to
+- id: osps-to-bpb-002
+  source: OSPS-BR-02
+  targets:
+  - entry-id: CC-B-5
+  - entry-id: CC-B-6
+  - entry-id: CC-B-7
+  relationship: relates-to
+- id: osps-to-bpb-005
+  source: OSPS-BR-03
+  targets:
+  - entry-id: B-B-11
+  relationship: relates-to
+- id: osps-to-bpb-006
+  source: OSPS-BR-04
+  targets:
+  - entry-id: CC-B-8
+  - entry-id: CC-B-9
+  - entry-id: Q-B-7
+  - entry-id: A-B-1
+  - entry-id: A-S-1
+  relationship: relates-to
+- id: osps-to-bpb-011
+  source: OSPS-BR-05
+  targets:
+  - entry-id: Q-B-2
+  relationship: relates-to
+- id: osps-to-bpb-012
+  source: OSPS-BR-07
+  targets:
+  - entry-id: S-B-5
+  relationship: relates-to
+- id: osps-to-bpb-013
+  source: OSPS-DO-01
+  targets:
+  - entry-id: B-B-1
+  - entry-id: B-B-9
+  - entry-id: B-S-7
+  - entry-id: B-S-9
+  relationship: relates-to
+- id: osps-to-bpb-017
+  source: OSPS-DO-02
+  targets:
+  - entry-id: B-B-3
+  - entry-id: R-B-1+
+  - entry-id: R-B-1
+  - entry-id: R-B-2
+  - entry-id: R-S-2
+  relationship: relates-to
+- id: osps-to-bpb-022
+  source: OSPS-DO-03
+  targets:
+  - entry-id: CC-B-8
+  relationship: relates-to
+- id: osps-to-bpb-023
+  source: OSPS-DO-04
+  targets:
+  - entry-id: R-B-3
+  relationship: relates-to
+- id: osps-to-bpb-024
+  source: OSPS-DO-06
+  targets:
+  - entry-id: A-S-1
+  relationship: relates-to
+- id: osps-to-bpb-025
+  source: OSPS-GV-01
+  targets:
+  - entry-id: B-S-3
+  - entry-id: B-S-4
+  relationship: relates-to
+- id: osps-to-bpb-027
+  source: OSPS-GV-02
+  targets:
+  - entry-id: B-B-3
+  - entry-id: B-B-12
+  relationship: relates-to
+- id: osps-to-bpb-029
+  source: OSPS-GV-03
+  targets:
+  - entry-id: B-B-4
+  - entry-id: B-S-3
+  - entry-id: B-B-4+
+  - entry-id: R-B-1
+  - entry-id: Q-G-2
+  relationship: relates-to
+- id: osps-to-bpb-034
+  source: OSPS-GV-04
+  targets:
+  - entry-id: B-B-5
+  - entry-id: B-S-3
+  - entry-id: B-B-4+
+  - entry-id: Q-G-2
+  relationship: relates-to
+- id: osps-to-bpb-038
+  source: OSPS-LE-01
+  targets:
+  - entry-id: B-S-1
+  relationship: relates-to
+- id: osps-to-bpb-039
+  source: OSPS-LE-02
+  targets:
+  - entry-id: B-B-6
+  - entry-id: B-B-7
+  relationship: relates-to
+- id: osps-to-bpb-041
+  source: OSPS-LE-03
+  targets:
+  - entry-id: B-B-8
+  relationship: relates-to
+- id: osps-to-bpb-042
+  source: OSPS-QA-01
+  targets:
+  - entry-id: CC-B-1
+  - entry-id: CC-B-2
+  - entry-id: CC-B-3
+  - entry-id: R-B-5
+  relationship: relates-to
+- id: osps-to-bpb-046
+  source: OSPS-QA-02
+  targets:
+  - entry-id: Q-S-8
+  - entry-id: Q-S-9
+  relationship: relates-to
+- id: osps-to-bpb-048
+  source: OSPS-QA-06
+  targets:
+  - entry-id: Q-B-4
+  - entry-id: Q-B-8
+  - entry-id: Q-B-9
+  - entry-id: Q-B-10
+  - entry-id: Q-S-2
+  relationship: relates-to
+- id: osps-to-bpb-053
+  source: OSPS-QA-07
+  targets:
+  - entry-id: B-G-3
+  relationship: relates-to
+- id: osps-to-bpb-054
+  source: OSPS-SA-01
+  targets:
+  - entry-id: B-B-1
+  - entry-id: B-S-7
+  - entry-id: B-S-8
+  relationship: relates-to
+- id: osps-to-bpb-057
+  source: OSPS-SA-02
+  targets:
+  - entry-id: B-B-10
+  - entry-id: B-S-7
+  relationship: relates-to
+- id: osps-to-bpb-059
+  source: OSPS-SA-03
+  targets:
+  - entry-id: B-S-8
+  - entry-id: S-G-1
+  relationship: relates-to
+- id: osps-to-bpb-061
+  source: OSPS-VM-01
+  targets:
+  - entry-id: R-B-6
+  - entry-id: R-B-8
+  - entry-id: R-S-2
+  - entry-id: S-B-14
+  - entry-id: S-B-15
+  relationship: relates-to
+- id: osps-to-bpb-066
+  source: OSPS-VM-02
+  targets:
+  - entry-id: B-S-8
+  relationship: relates-to
+- id: osps-to-bpb-067
+  source: OSPS-VM-03
+  targets:
+  - entry-id: R-B-7
+  relationship: relates-to
+- id: osps-to-bpb-068
+  source: OSPS-VM-05
+  targets:
+  - entry-id: B-S-8
+  - entry-id: Q-B-12
+  - entry-id: Q-S-9
+  - entry-id: S-B-14
+  - entry-id: S-B-15
+  - entry-id: A-B-1
+  - entry-id: A-B-3
+  - entry-id: A-B-8
+  - entry-id: A-S-1
+  relationship: relates-to
+- id: osps-to-bpb-077
+  source: OSPS-VM-06
+  targets:
+  - entry-id: B-S-8
+  - entry-id: Q-B-12
+  - entry-id: Q-S-9
+  - entry-id: S-B-14
+  - entry-id: S-B-15
+  - entry-id: A-B-1
+  - entry-id: A-B-3
+  - entry-id: A-B-8
+  - entry-id: A-S-1
+  relationship: relates-to

@@ -1,0 +1,283 @@
+title: OSPS Baseline to NIST Secure Software Development Framework (SP 800-218)
+metadata:
+  id: osps-to-ssdf
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: >-
+    Mapping between OSPS Baseline controls and NIST Secure Software Development Framework
+    (SP 800-218).
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: SSDF
+    title: Secure Software Development Framework
+    version: 1.1
+    url: https://csrc.nist.gov/pubs/sp/800/218/final
+    description: "The Secure Software Development Framework (SSDF) is a set of fundamental, sound, and secure software development practices based on established secure software development practice documents from organizations such as BSA, OWASP, and SAFECode. Few software development life cycle (SDLC) models explicitly address software security in detail, so practices like those in the SSDF need to be added to and integrated with each SDLC implementation. Following the SSDF practices should help software producers reduce the number of vulnerabilities in released software, reduce the potential impact of the exploitation of undetected or unaddressed vulnerabilities, and address the root causes of vulnerabilities to prevent recurrences. Also, because the SSDF provides a common language for describing secure software development practices, software producers and acquirers can use it to foster their communications for procurement processes and other management activities."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: SSDF
+  entry-type: Guideline
+mappings:
+- id: osps-to-ssdf-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-004
+  source: OSPS-AC-02
+  targets:
+  - entry-id: PO.2
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-008
+  source: OSPS-AC-03
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-011
+  source: OSPS-AC-04
+  targets:
+  - entry-id: PO.2
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-015
+  source: OSPS-BR-01
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PO.5.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-019
+  source: OSPS-BR-02
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: PS.3
+  relationship: relates-to
+- id: osps-to-ssdf-023
+  source: OSPS-BR-03
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PO.5.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-027
+  source: OSPS-BR-04
+  targets:
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: PS.3
+  - entry-id: PW.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-031
+  source: OSPS-BR-05
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-034
+  source: OSPS-BR-06
+  targets:
+  - entry-id: PO.5.2
+  - entry-id: PS.2
+  - entry-id: PS.2.1
+  - entry-id: PW.6.2
+  relationship: relates-to
+- id: osps-to-ssdf-038
+  source: OSPS-BR-07
+  targets:
+  - entry-id: PO.1.1
+  - entry-id: P0.3.1
+  - entry-id: P0.4.2
+  - entry-id: PO.5.1
+  - entry-id: PW.1.2
+  - entry-id: PW.1.3
+  - entry-id: PW.5.1
+  relationship: relates-to
+- id: osps-to-ssdf-045
+  source: OSPS-DO-01
+  targets:
+  - entry-id: PW.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-046
+  source: OSPS-DO-02
+  targets:
+  - entry-id: PW.1.2
+  - entry-id: RV.1.1
+  - entry-id: RV.2.1
+  - entry-id: RV.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-050
+  source: OSPS-DO-03
+  targets:
+  - entry-id: PO.4.2
+  - entry-id: PS.2
+  - entry-id: PS.2.1
+  - entry-id: PS.3.1
+  - entry-id: RV.1.3
+  relationship: relates-to
+- id: osps-to-ssdf-055
+  source: OSPS-DO-04
+  targets:
+  - entry-id: PO.4.2
+  - entry-id: PS.3.1
+  - entry-id: RV.1.3
+  relationship: relates-to
+- id: osps-to-ssdf-058
+  source: OSPS-GV-02
+  targets:
+  - entry-id: PS.3
+  - entry-id: PW.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-060
+  source: OSPS-GV-03
+  targets:
+  - entry-id: PW.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-061
+  source: OSPS-GV-04
+  targets:
+  - entry-id: PO.2
+  - entry-id: PO.3.2
+  relationship: relates-to
+- id: osps-to-ssdf-063
+  source: OSPS-LE-01
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PS.1
+  - entry-id: PW.1.2
+  - entry-id: PW.2.1
+  relationship: relates-to
+- id: osps-to-ssdf-067
+  source: OSPS-LE-02
+  targets:
+  - entry-id: PO.3.2
+  relationship: relates-to
+- id: osps-to-ssdf-068
+  source: OSPS-LE-03
+  targets:
+  - entry-id: PO.3.2
+  relationship: relates-to
+- id: osps-to-ssdf-069
+  source: OSPS-QA-01
+  targets:
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: PS.3
+  - entry-id: PW.1.2
+  - entry-id: PW.2.1
+  relationship: relates-to
+- id: osps-to-ssdf-074
+  source: OSPS-QA-02
+  targets:
+  - entry-id: PO.3.3
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: PS.3.2
+  - entry-id: PW.4
+  relationship: relates-to
+- id: osps-to-ssdf-079
+  source: OSPS-QA-03
+  targets:
+  - entry-id: PO.4.1
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: RV.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-083
+  source: OSPS-QA-04
+  targets:
+  - entry-id: PO.3.2
+  - entry-id: PO.4.1
+  - entry-id: PS.1
+  - entry-id: PS.2
+  - entry-id: RV.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-088
+  source: OSPS-QA-05
+  targets:
+  - entry-id: PS.1
+  - entry-id: PS.2
+  relationship: relates-to
+- id: osps-to-ssdf-090
+  source: OSPS-QA-06
+  targets:
+  - entry-id: PW.8.2
+  relationship: relates-to
+- id: osps-to-ssdf-091
+  source: OSPS-SA-01
+  targets:
+  - entry-id: PO.1
+  - entry-id: PO.2
+  - entry-id: PO.3.2
+  relationship: relates-to
+- id: osps-to-ssdf-094
+  source: OSPS-SA-02
+  targets:
+  - entry-id: PW.1.2
+  relationship: relates-to
+- id: osps-to-ssdf-095
+  source: OSPS-SA-03
+  targets:
+  - entry-id: PO.5.1
+  - entry-id: PW.1.1
+  relationship: relates-to
+- id: osps-to-ssdf-097
+  source: OSPS-VM-01
+  targets:
+  - entry-id: RV.1.3
+  relationship: relates-to
+- id: osps-to-ssdf-098
+  source: OSPS-VM-02
+  targets:
+  - entry-id: RV.1.3
+  relationship: relates-to
+- id: osps-to-ssdf-099
+  source: OSPS-VM-04
+  targets:
+  - entry-id: PO.4.1
+  - entry-id: RV.2.1
+  - entry-id: RV.2.2
+  relationship: relates-to
+- id: osps-to-ssdf-102
+  source: OSPS-VM-05
+  targets:
+  - entry-id: PO.4
+  - entry-id: PW.1.2
+  - entry-id: PW.8.1
+  - entry-id: RV.1.2
+  - entry-id: RV.1.3
+  - entry-id: RV.2.1
+  - entry-id: RV.2.2
+  relationship: relates-to
+- id: osps-to-ssdf-109
+  source: OSPS-VM-06
+  targets:
+  - entry-id: PO.4
+  - entry-id: PW.1.2
+  - entry-id: PW.8.1
+  - entry-id: RV.1.2
+  - entry-id: RV.1.3
+  - entry-id: RV.2.1
+  - entry-id: RV 2.2
+  relationship: relates-to

@@ -1,0 +1,273 @@
+title: OSPS Baseline to Cyber Resilience Act (Regulation 2024/2847)
+metadata:
+  id: osps-to-cra
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and Cyber Resilience Act (Regulation 2024/2847).
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: CRA
+    title: Cyber Resilience Act
+    version: 20.11.2024
+    url: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402847#tit_1
+    description: "Regulation (EU) 2024/2847 of the European Parliament and of the Council of 23 October 2024 on horizontal cybersecurity requirements for products with digital elements and amending Regulations (EU) No 168/2013 and (EU) 2019/1020 and Directive (EU) 2020/1828 (Cyber Resilience Act) (Text with EEA relevance)"
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: CRA
+  entry-type: Guideline
+mappings:
+- id: osps-to-cra-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: 1.2d
+  - entry-id: 1.2e
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-004
+  source: OSPS-AC-02
+  targets:
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-005
+  source: OSPS-AC-03
+  targets:
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-006
+  source: OSPS-AC-04
+  targets:
+  - entry-id: 1.2d
+  - entry-id: 1.2e
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-009
+  source: OSPS-BR-01
+  targets:
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-010
+  source: OSPS-BR-02
+  targets:
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-011
+  source: OSPS-BR-03
+  targets:
+  - entry-id: 1.2d
+  - entry-id: 1.2e
+  - entry-id: 1.2f
+  - entry-id: 1.2i
+  - entry-id: 1.2j
+  - entry-id: 1.2k
+  relationship: relates-to
+- id: osps-to-cra-017
+  source: OSPS-BR-04
+  targets:
+  - entry-id: 1.2d
+  - entry-id: 1.2f
+  - entry-id: 1.2h
+  - entry-id: 1.2j
+  - entry-id: 1.2l
+  - entry-id: "2.5"
+  relationship: relates-to
+- id: osps-to-cra-023
+  source: OSPS-BR-05
+  targets:
+  - entry-id: 1.2b
+  - entry-id: 1.2d
+  - entry-id: 1.2f
+  - entry-id: 1.2h
+  - entry-id: 1.2j
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.3"
+  relationship: relates-to
+- id: osps-to-cra-031
+  source: OSPS-DO-01
+  targets:
+  - entry-id: 1.2b
+  - entry-id: 1.2j
+  - entry-id: 1.2k
+  relationship: relates-to
+- id: osps-to-cra-034
+  source: OSPS-DO-02
+  targets:
+  - entry-id: 1.2c
+  - entry-id: 1.2l
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.5"
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-040
+  source: OSPS-DO-03
+  targets:
+  - entry-id: 1.2d
+  relationship: relates-to
+- id: osps-to-cra-041
+  source: OSPS-DO-05
+  targets:
+  - entry-id: 1.2c
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-043
+  source: OSPS-DO-06
+  targets:
+  - entry-id: "2.1"
+  relationship: relates-to
+- id: osps-to-cra-044
+  source: OSPS-GV-02
+  targets:
+  - entry-id: 1.2l
+  - entry-id: "2.3"
+  - entry-id: "2.4"
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-048
+  source: OSPS-GV-03
+  targets:
+  - entry-id: 1.2l
+  - entry-id: "2.4"
+  relationship: relates-to
+- id: osps-to-cra-050
+  source: OSPS-GV-04
+  targets:
+  - entry-id: 1.2d
+  - entry-id: 1.2l
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.5"
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-056
+  source: OSPS-LE-01
+  targets:
+  - entry-id: 1.2b
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-058
+  source: OSPS-LE-02
+  targets:
+  - entry-id: 1.2b
+  relationship: relates-to
+- id: osps-to-cra-059
+  source: OSPS-LE-03
+  targets:
+  - entry-id: 1.2b
+  relationship: relates-to
+- id: osps-to-cra-060
+  source: OSPS-QA-01
+  targets:
+  - entry-id: 1.2b
+  - entry-id: 1.2f
+  - entry-id: 1.2j
+  relationship: relates-to
+- id: osps-to-cra-063
+  source: OSPS-QA-02
+  targets:
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.3"
+  relationship: relates-to
+- id: osps-to-cra-066
+  source: OSPS-QA-03
+  targets:
+  - entry-id: 1.2f
+  - entry-id: 1.2k
+  relationship: relates-to
+- id: osps-to-cra-068
+  source: OSPS-QA-04
+  targets:
+  - entry-id: 1.2b
+  - entry-id: 1.2f
+  relationship: relates-to
+- id: osps-to-cra-070
+  source: OSPS-QA-05
+  targets:
+  - entry-id: 1.2b
+  relationship: relates-to
+- id: osps-to-cra-071
+  source: OSPS-QA-06
+  targets:
+  - entry-id: "2.3"
+  relationship: relates-to
+- id: osps-to-cra-072
+  source: OSPS-SA-01
+  targets:
+  - entry-id: 1.2a
+  - entry-id: 1.2b
+  relationship: relates-to
+- id: osps-to-cra-074
+  source: OSPS-SA-02
+  targets:
+  - entry-id: 1.2a
+  - entry-id: 1.2b
+  relationship: relates-to
+- id: osps-to-cra-076
+  source: OSPS-SA-03
+  targets:
+  - entry-id: "1.1"
+  - entry-id: 1.2j
+  - entry-id: 1.2k
+  - entry-id: "2.2"
+  relationship: relates-to
+- id: osps-to-cra-080
+  source: OSPS-VM-01
+  targets:
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.3"
+  - entry-id: "2.6"
+  - entry-id: "2.7"
+  - entry-id: "2.8"
+  relationship: relates-to
+- id: osps-to-cra-086
+  source: OSPS-VM-02
+  targets:
+  - entry-id: "2.5"
+  relationship: relates-to
+- id: osps-to-cra-087
+  source: OSPS-VM-03
+  targets:
+  - entry-id: "2.5"
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-089
+  source: OSPS-VM-04
+  targets:
+  - entry-id: 1.2a
+  - entry-id: 1.2b
+  - entry-id: "2.1"
+  - entry-id: "2.4"
+  - entry-id: "2.6"
+  relationship: relates-to
+- id: osps-to-cra-094
+  source: OSPS-VM-05
+  targets:
+  - entry-id: 1.2a
+  - entry-id: 1.2b
+  - entry-id: 1.2c
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.3"
+  - entry-id: "2.4"
+  relationship: relates-to
+- id: osps-to-cra-101
+  source: OSPS-VM-06
+  targets:
+  - entry-id: 1.2a
+  - entry-id: 1.2b
+  - entry-id: 1.2c
+  - entry-id: "2.1"
+  - entry-id: "2.2"
+  - entry-id: "2.3"
+  - entry-id: "2.4"
+  relationship: relates-to

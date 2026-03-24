@@ -1,0 +1,75 @@
+title: OSPS Baseline to Supply-chain Levels for Software Artifacts
+metadata:
+  id: osps-to-slsa
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and Supply-chain Levels for Software Artifacts.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: SLSA
+    title: Supply Chain Levels for Software Artifacts
+    version: 1.0
+    url: https://github.com/slsa-framework/slsa
+    description: "SLSA (pronounced \"salsa\") is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: SLSA
+  entry-type: Guideline
+mappings:
+- id: osps-to-slsa-001
+  source: OSPS-AC-04
+  targets:
+  - entry-id: Producer - Choose an appropriate build platform
+  - entry-id: Build platform - Isolation strength - Isolated
+  relationship: relates-to
+- id: osps-to-slsa-003
+  source: OSPS-BR-01
+  targets:
+  - entry-id: Choose an appropriate build platform
+  relationship: relates-to
+- id: osps-to-slsa-004
+  source: OSPS-BR-02
+  targets:
+  - entry-id: Follow a consistent build process
+  - entry-id: Provenance generation- Exists, Authentic
+  relationship: relates-to
+- id: osps-to-slsa-006
+  source: OSPS-BR-03
+  targets:
+  - entry-id: Choose an appropriate build platform
+  relationship: relates-to
+- id: osps-to-slsa-007
+  source: OSPS-BR-04
+  targets:
+  - entry-id: Choose an appropriate build platform
+  - entry-id: Follow a consistent build process
+  - entry-id: Build platform - Isolation strength - isolated
+  relationship: relates-to
+- id: osps-to-slsa-010
+  source: OSPS-BR-05
+  targets:
+  - entry-id: Isolation strength - isolated
+  relationship: relates-to
+- id: osps-to-slsa-011
+  source: OSPS-BR-06
+  targets:
+  - entry-id: Distribute provenance - Exists
+  relationship: relates-to
+- id: osps-to-slsa-012
+  source: OSPS-QA-01
+  targets:
+  - entry-id: Build platform - isolation strength - Isolated
+  relationship: relates-to
+- id: osps-to-slsa-013
+  source: OSPS-QA-04
+  targets:
+  - entry-id: Build platform - isolation strength - Isolated
+  relationship: relates-to

@@ -1,0 +1,32 @@
+title: OSPS Baseline to EU Digital Operational Resilience Act (DORA)
+metadata:
+  id: osps-to-dora
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and EU Digital Operational Resilience Act (DORA).
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: DORA
+    title: EU Digital Operational Resilience Act (DORA)
+    version: 2022-12-14
+    url: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R2554&from=FR
+    description: "On digital operational resilience for the financial sector and amending Regulations (EC) No 1060/2009, (EU) No 648/2012, (EU) No 600/2014, (EU) No 909/2014 and (EU) 2016/1011."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: DORA
+  entry-type: Guideline
+mappings:
+- id: osps-to-dora-001
+  source: OSPS-PLACEHOLDER
+  targets:
+  - entry-id: PLACEHOLDER
+  relationship: relates-to
+  remarks: Placeholder mapping; real entries pending.

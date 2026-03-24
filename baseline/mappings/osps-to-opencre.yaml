@@ -1,0 +1,236 @@
+title: OSPS Baseline to Open Common Requirement Enumeration
+metadata:
+  id: osps-to-opencre
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and Open Common Requirement Enumeration.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: OCRE
+    title: Open Cybersecurity Reference Architecture
+    version: 2024
+    url: https://github.com/OWASP/OpenCRE
+    description: "OpenCRE stands for Open Common Requirement enumeration. It is an interactive content linking platform for uniting security standards and guidelines. It offers easy and robust access to relevant information when designing, developing, testing and procuring secure software."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: OpenCRE
+  entry-type: Guideline
+mappings:
+- id: osps-to-opencre-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 347-352
+  - entry-id: 333-858
+  - entry-id: 152-725
+  - entry-id: 201-246
+  relationship: relates-to
+- id: osps-to-opencre-007
+  source: OSPS-AC-02
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 802-056
+  - entry-id: 368-633
+  - entry-id: 152-725
+  relationship: relates-to
+- id: osps-to-opencre-012
+  source: OSPS-AC-03
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 152-725
+  relationship: relates-to
+- id: osps-to-opencre-015
+  source: OSPS-AC-04
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 347-507
+  - entry-id: 263-284
+  - entry-id: 123-124
+  relationship: relates-to
+- id: osps-to-opencre-020
+  source: OSPS-BR-01
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 357-352
+  relationship: relates-to
+- id: osps-to-opencre-023
+  source: OSPS-BR-02
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  relationship: relates-to
+- id: osps-to-opencre-025
+  source: OSPS-BR-03
+  targets:
+  - entry-id: 483-813
+  - entry-id: 124-564
+  - entry-id: 263-184
+  relationship: relates-to
+- id: osps-to-opencre-028
+  source: OSPS-BR-04
+  targets:
+  - entry-id: 483-813
+  - entry-id: 068-486
+  - entry-id: 124-564
+  - entry-id: 757-271
+  - entry-id: 347-352
+  - entry-id: 263-184
+  - entry-id: 208-355
+  - entry-id: 745-356
+  - entry-id: 732-148
+  relationship: relates-to
+- id: osps-to-opencre-037
+  source: OSPS-BR-05
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 347-352
+  - entry-id: 715-334
+  relationship: relates-to
+- id: osps-to-opencre-041
+  source: OSPS-DO-01
+  targets:
+  - entry-id: 036-275
+  relationship: relates-to
+- id: osps-to-opencre-042
+  source: OSPS-DO-03
+  targets:
+  - entry-id: 171-222
+  relationship: relates-to
+- id: osps-to-opencre-043
+  source: OSPS-DO-05
+  targets:
+  - entry-id: 673-475
+  - entry-id: 053-751
+  relationship: relates-to
+- id: osps-to-opencre-045
+  source: OSPS-DO-06
+  targets:
+  - entry-id: 613-286
+  - entry-id: 053-751
+  relationship: relates-to
+- id: osps-to-opencre-047
+  source: OSPS-GV-01
+  targets:
+  - entry-id: 013-021
+  relationship: relates-to
+- id: osps-to-opencre-048
+  source: OSPS-GV-04
+  targets:
+  - entry-id: 123-124
+  - entry-id: 152-725
+  relationship: relates-to
+- id: osps-to-opencre-050
+  source: OSPS-QA-01
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 757-271
+  relationship: relates-to
+- id: osps-to-opencre-053
+  source: OSPS-QA-02
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  - entry-id: 673-475
+  - entry-id: 863-521
+  - entry-id: 613-286
+  relationship: relates-to
+- id: osps-to-opencre-058
+  source: OSPS-QA-03
+  targets:
+  - entry-id: 263-184
+  - entry-id: 253-452
+  relationship: relates-to
+- id: osps-to-opencre-060
+  source: OSPS-QA-04
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  relationship: relates-to
+- id: osps-to-opencre-062
+  source: OSPS-QA-05
+  targets:
+  - entry-id: 486-813
+  - entry-id: 124-564
+  relationship: relates-to
+- id: osps-to-opencre-064
+  source: OSPS-QA-06
+  targets:
+  - entry-id: 207-435
+  - entry-id: 088-377
+  relationship: relates-to
+- id: osps-to-opencre-066
+  source: OSPS-SA-01
+  targets:
+  - entry-id: 155-155
+  - entry-id: 326-704
+  - entry-id: 068-102
+  - entry-id: 036-275
+  - entry-id: 162-655
+  relationship: relates-to
+- id: osps-to-opencre-071
+  source: OSPS-SA-02
+  targets:
+  - entry-id: 155-155
+  - entry-id: 068-102
+  - entry-id: 072-713
+  - entry-id: 820-878
+  relationship: relates-to
+- id: osps-to-opencre-075
+  source: OSPS-SA-03
+  targets:
+  - entry-id: 068-102
+  - entry-id: 154-031
+  - entry-id: 888-770
+  relationship: relates-to
+- id: osps-to-opencre-078
+  source: OSPS-VM-01
+  targets:
+  - entry-id: 887-750
+  relationship: relates-to
+- id: osps-to-opencre-079
+  source: OSPS-VM-02
+  targets:
+  - entry-id: 464-513
+  relationship: relates-to
+- id: osps-to-opencre-080
+  source: OSPS-VM-03
+  targets:
+  - entry-id: 308-514
+  relationship: relates-to
+- id: osps-to-opencre-081
+  source: OSPS-VM-05
+  targets:
+  - entry-id: 155-155
+  - entry-id: 124-564
+  - entry-id: 757-271
+  - entry-id: 464-513
+  - entry-id: 611-158
+  - entry-id: 207-435
+  - entry-id: 088-377
+  relationship: relates-to
+- id: osps-to-opencre-088
+  source: OSPS-VM-06
+  targets:
+  - entry-id: 155-155
+  - entry-id: 124-564
+  - entry-id: 757-271
+  - entry-id: 464-513
+  - entry-id: 611-158
+  - entry-id: 207-435
+  - entry-id: 088-377
+  relationship: relates-to

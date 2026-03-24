@@ -1,0 +1,382 @@
+title: OSPS Baseline to Payment Card Industry Data Security Standard
+metadata:
+  id: osps-to-pcidss
+  type: MappingDocument
+  gemara-version: v1.0.0-rc.1
+  description: Mapping between OSPS Baseline controls and Payment Card Industry Data Security Standard.
+  author:
+    id: osps-authors
+    name: OSPS Authors
+    type: Human
+  mapping-references:
+  - id: osps-baseline
+    title: Open Source Project Security Baseline
+    version: devel
+  - id: PCIDSS
+    title: Payment Card Industry Data Security Standard
+    version: 4.0.1
+    url: https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf
+    description: "PCI Security Standards are technical and operational requirements set by the PCI Security Standards Council (PCI SSC) to protect cardholder data. The standards apply to all entities that store, process or transmit cardholder data – with requirements for software developers and manufacturers of applications and devices used in those transactions. The Council is responsible for managing the security standards, while compliance with the PCI set of standards is enforced by the founding members of the Council: American Express, Discover Financial Services, JCB, MasterCard and Visa Inc. The PCI Data Security Standard (PCI DSS) applies to all entities that store, process, and/or transmit cardholder data. It covers technical and operational system components included in or connected to cardholder data. If you accept or process payment cards, PCI DSS applies to you."
+source-reference:
+  reference-id: osps-baseline
+  entry-type: Control
+target-reference:
+  reference-id: PCIDSS
+  entry-type: Guideline
+mappings:
+- id: osps-to-pcidss-001
+  source: OSPS-AC-01
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 8.2.1
+  - entry-id: 8.3.1
+  relationship: relates-to
+- id: osps-to-pcidss-004
+  source: OSPS-AC-02
+  targets:
+  - entry-id: 2.2.1
+  relationship: relates-to
+- id: osps-to-pcidss-005
+  source: OSPS-AC-03
+  targets:
+  - entry-id: 2.2.1
+  relationship: relates-to
+- id: osps-to-pcidss-006
+  source: OSPS-AC-04
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 8.2.1
+  relationship: relates-to
+- id: osps-to-pcidss-008
+  source: OSPS-BR-01
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 6.4.1
+  relationship: relates-to
+- id: osps-to-pcidss-010
+  source: OSPS-BR-02
+  targets:
+  - entry-id: 6.4.3
+  relationship: relates-to
+- id: osps-to-pcidss-011
+  source: OSPS-BR-03
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 2.2.7
+  - entry-id: 4.2.1
+  - entry-id: 4.2.2
+  - entry-id: 6.4.1
+  - entry-id: 8.3.2
+  relationship: relates-to
+- id: osps-to-pcidss-017
+  source: OSPS-BR-04
+  targets:
+  - entry-id: 6.2.1
+  - entry-id: 6.4.1
+  - entry-id: 6.5.1
+  - entry-id: 6.5.2
+  - entry-id: 10.2.2
+  relationship: relates-to
+- id: osps-to-pcidss-022
+  source: OSPS-BR-05
+  targets:
+  - entry-id: 6.4.3
+  relationship: relates-to
+- id: osps-to-pcidss-023
+  source: OSPS-BR-06
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 2.2.7
+  - entry-id: 3.5.1
+  - entry-id: 4.2.1
+  - entry-id: 4.2.2
+  - entry-id: 6.4.1
+  - entry-id: 8.3.2
+  relationship: relates-to
+- id: osps-to-pcidss-030
+  source: OSPS-DO-01
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 2.2.1
+  - entry-id: 3.1.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.2.1
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  - entry-id: 12.10.5
+  relationship: relates-to
+- id: osps-to-pcidss-041
+  source: OSPS-DO-02
+  targets:
+  - entry-id: 6.3.2
+  - entry-id: 6.3.3
+  - entry-id: 6.5.1
+  - entry-id: 6.5.2
+  - entry-id: 12.10.2
+  relationship: relates-to
+- id: osps-to-pcidss-046
+  source: OSPS-DO-03
+  targets:
+  - entry-id: 3.1.1
+  - entry-id: 3.5.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.2.1
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  relationship: relates-to
+- id: osps-to-pcidss-055
+  source: OSPS-DO-04
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 3.1.1
+  - entry-id: 3.2.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.3.3
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  relationship: relates-to
+- id: osps-to-pcidss-065
+  source: OSPS-DO-05
+  targets:
+  - entry-id: 3.1.1
+  - entry-id: 3.2.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.3.2
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  relationship: relates-to
+- id: osps-to-pcidss-074
+  source: OSPS-DO-06
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 3.1.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.3.2
+  - entry-id: 6.4.3
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  - entry-id: 12.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-085
+  source: OSPS-GV-01
+  targets:
+  - entry-id: 2.1.2
+  - entry-id: 3.1.1
+  - entry-id: 3.1.2
+  - entry-id: 4.1.1
+  - entry-id: 4.1.2
+  - entry-id: 5.1.1
+  - entry-id: 5.1.2
+  - entry-id: 6.1.1
+  - entry-id: 6.1.2
+  - entry-id: 6.5.4
+  - entry-id: 7.1.1
+  - entry-id: 7.1.2
+  - entry-id: 8.1.1
+  - entry-id: 8.1.2
+  - entry-id: 11.1.1
+  - entry-id: 11.1.2
+  - entry-id: 12.1.3
+  - entry-id: 12.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-103
+  source: OSPS-GV-02
+  targets:
+  - entry-id: 12.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-104
+  source: OSPS-GV-03
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 6.5.4
+  - entry-id: 8.2.1
+  - entry-id: 12.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-108
+  source: OSPS-GV-04
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 6.5.4
+  - entry-id: 8.2.1
+  - entry-id: 8.2.2
+  relationship: relates-to
+- id: osps-to-pcidss-112
+  source: OSPS-LE-01
+  targets:
+  - entry-id: 12.8.5
+  relationship: relates-to
+- id: osps-to-pcidss-113
+  source: OSPS-LE-02
+  targets:
+  - entry-id: 3.2.1
+  relationship: relates-to
+- id: osps-to-pcidss-114
+  source: OSPS-LE-03
+  targets:
+  - entry-id: 3.2.1
+  relationship: relates-to
+- id: osps-to-pcidss-115
+  source: OSPS-QA-01
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 6.2.1
+  - entry-id: 6.5.1
+  - entry-id: 6.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-119
+  source: OSPS-QA-02
+  targets:
+  - entry-id: 6.3.2
+  - entry-id: 6.4.3
+  - entry-id: 12.5.1
+  relationship: relates-to
+- id: osps-to-pcidss-122
+  source: OSPS-QA-03
+  targets:
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.5.2
+  relationship: relates-to
+- id: osps-to-pcidss-125
+  source: OSPS-QA-04
+  targets:
+  - entry-id: 6.4.2
+  relationship: relates-to
+- id: osps-to-pcidss-126
+  source: OSPS-QA-05
+  targets:
+  - entry-id: 6.4.3
+  relationship: relates-to
+- id: osps-to-pcidss-127
+  source: OSPS-QA-06
+  targets:
+  - entry-id: 6.2.3
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.4.2
+  relationship: relates-to
+- id: osps-to-pcidss-131
+  source: OSPS-QA-07
+  targets:
+  - entry-id: 6.2.3.1
+  - entry-id: 6.4.2
+  - entry-id: 6.5.4
+  relationship: relates-to
+- id: osps-to-pcidss-134
+  source: OSPS-SA-01
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 2.2.3
+  - entry-id: 2.2.4
+  - entry-id: 2.2.5
+  - entry-id: 2.2.6
+  - entry-id: 3.1.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.2.1
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  - entry-id: 12.3.1
+  - entry-id: 12.5.3
+  relationship: relates-to
+- id: osps-to-pcidss-149
+  source: OSPS-SA-02
+  targets:
+  - entry-id: 2.2.1
+  - entry-id: 2.2.3
+  - entry-id: 2.2.4
+  - entry-id: 2.2.5
+  - entry-id: 2.2.6
+  - entry-id: 6.2.1
+  - entry-id: 12.3.1
+  - entry-id: 12.8.1
+  relationship: relates-to
+- id: osps-to-pcidss-157
+  source: OSPS-SA-03
+  targets:
+  - entry-id: 2.2.4
+  - entry-id: 2.2.5
+  - entry-id: 2.2.6
+  - entry-id: 6.2.1
+  - entry-id: 6.2.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.4.2
+  - entry-id: 11.3.1
+  - entry-id: 12.3.1
+  relationship: relates-to
+- id: osps-to-pcidss-166
+  source: OSPS-VM-01
+  targets:
+  - entry-id: 2.1.1
+  - entry-id: 3.1.1
+  - entry-id: 4.1.1
+  - entry-id: 5.1.1
+  - entry-id: 6.1.1
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 7.1.1
+  - entry-id: 8.1.1
+  - entry-id: 11.1.1
+  - entry-id: 11.2.1
+  - entry-id: 12.1.1
+  - entry-id: 12.1.3
+  relationship: relates-to
+- id: osps-to-pcidss-179
+  source: OSPS-VM-02
+  targets:
+  - entry-id: 6.3.3
+  - entry-id: 12.1.1
+  - entry-id: 12.10.2
+  relationship: relates-to
+- id: osps-to-pcidss-182
+  source: OSPS-VM-03
+  targets:
+  - entry-id: 6.3.1
+  - entry-id: 6.3.3
+  - entry-id: 12.10.2
+  relationship: relates-to
+- id: osps-to-pcidss-185
+  source: OSPS-VM-04
+  targets:
+  - entry-id: 6.2.3
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.3.3
+  - entry-id: 11.3.1
+  relationship: relates-to
+- id: osps-to-pcidss-190
+  source: OSPS-VM-05
+  targets:
+  - entry-id: 6.2.3
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.4.1
+  - entry-id: 6.4.2
+  relationship: relates-to
+- id: osps-to-pcidss-195
+  source: OSPS-VM-06
+  targets:
+  - entry-id: 6.2.3
+  - entry-id: 6.3.1
+  - entry-id: 6.3.2
+  - entry-id: 6.4.1
+  - entry-id: 6.4.2
+  - entry-id: 6.5.2
+  relationship: relates-to

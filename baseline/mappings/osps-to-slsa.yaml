@@ -14,7 +14,7 @@ metadata:
     version: devel
   - id: SLSA
     title: Supply Chain Levels for Software Artifacts
-    version: 1.0
+    version: "1.0"
     url: https://github.com/slsa-framework/slsa
     description: "SLSA (pronounced \"salsa\") is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain."
 source-reference:

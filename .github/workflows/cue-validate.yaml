@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: Copyright 2025 The OSPS Baseline Authors
+# SPDX-License-Identifier: Apache-2.0
+---
+name: Validate CUE Schemas
+
+on:
+  pull_request: {}
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate-catalog:
+    name: Validate Catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Go
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+        with:
+          go-version: "1.24"
+          check-latest: true
+          cache: true
+
+      - name: Setup CUE
+        uses: cue-lang/setup-cue@a93fa358375740cd8b0078f76355512b9208acb1 # v1.0.1
+        with:
+          version: latest
+
+      - name: Build and generate Gemara output
+        run: |
+          mkdir -p build
+          cd cmd && go build -o ../build/baseline-compiler .
+          cd ..
+          ./build/baseline-compiler gemara -b baseline -o build/baseline.gemara.yaml
+
+      - name: Validate catalog against CUE schema
+        run: cd schema && cue vet -d '#OSPSBaseline' . ../build/baseline.gemara.yaml
+
+  validate-mappings:
+    name: Validate Mappings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup CUE
+        uses: cue-lang/setup-cue@a93fa358375740cd8b0078f76355512b9208acb1 # v1.0.1
+        with:
+          version: latest
+
+      - name: Validate mappings against CUE schema
+        run: cd schema && cue vet -d '#OSPSMapping' . ../baseline/mappings/*.yaml

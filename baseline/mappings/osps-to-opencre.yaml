@@ -14,7 +14,7 @@ metadata:
     version: devel
   - id: OCRE
     title: Open Cybersecurity Reference Architecture
-    version: 2024
+    version: "2024"
     url: https://github.com/OWASP/OpenCRE
     description: "OpenCRE stands for Open Common Requirement enumeration. It is an interactive content linking platform for uniting security standards and guidelines. It offers easy and robust access to relevant information when designing, developing, testing and procuring secure software."
 source-reference:

@@ -14,7 +14,7 @@ metadata:
     version: devel
   - id: SAMM
     title: OWASP Software Assurance Maturity Model
-    version: 2.0
+    version: "2.0"
     url: https://owaspsamm.org/model/
     description: "The mission of OWASP Software Assurance Maturity Model (SAMM) is to be the prime maturity model for software assurance that provides an effective and measurable way for all types of organizations to analyze and improve their software security posture. OWASP SAMM supports the complete software lifecycle, including development and acquisition, and is technology and process agnostic. It is intentionally built to be evolutive and risk-driven in nature."
 source-reference:

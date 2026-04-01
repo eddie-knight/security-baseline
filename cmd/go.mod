@@ -22,4 +22,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/gemaraproj/go-gemara => github.com/jpower432/go-gemara v0.0.0-20260324204100-6b143943de05
+// Local dev: sibling clone at ../../go-gemara (parent of repo + go-gemara). CI checks out there via path: ../go-gemara. Or pin to a published module once CatalogToMarkdown is released.
+replace github.com/gemaraproj/go-gemara => ../../go-gemara

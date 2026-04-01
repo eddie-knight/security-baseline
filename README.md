@@ -61,6 +61,7 @@ The Security Baseline SIG maintains a Golang tool for validating and rendering B
 * [compile](#compile): Compile a YAML file of security controls
 * completion  Generate the autocompletion script for the specified shell
 * help        Help about any command
+* [gemara](#gemara): Export the assembled ControlCatalog as Gemara YAML or Markdown (via [go-gemara](https://github.com/gemaraproj/go-gemara) `gemaraconv`)
 * [oscal](#oscal): Write the Baseline definition to an OSCAL json catalog
 * [validate](#validate): Validate the baseline data files
 
@@ -75,6 +76,22 @@ To produce a file for use in a static site generator (which is how we create bas
 To produce a checklist file to use as an aid to evaluating your project's conformance to OSPS Baseline, specify a file argument to `--checklist-output`.
 
 Use the `--help` flag for more options.
+
+### gemara
+
+This command assembles the YAML under `/baseline` into a single Gemara `ControlCatalog` and writes **Gemara YAML** by default (for `cue vet` and other tooling). With **`--markdown`**, it instead renders the catalog to **Markdown** using [`gemaraconv.CatalogToMarkdown`](https://pkg.go.dev/github.com/gemaraproj/go-gemara/gemaraconv#CatalogToMarkdown) from [go-gemara](https://github.com/gemaraproj/go-gemara).
+
+Examples:
+
+```bash
+cd cmd
+go run . gemara -b ../baseline -o ../build/baseline.gemara.yaml
+go run . gemara -b ../baseline --markdown -o ../build/baseline.md
+```
+
+Use **`--no-toc`** with **`--markdown`** to omit the table of contents.
+
+The `go.mod` in `cmd/` uses `replace github.com/gemaraproj/go-gemara => ../../go-gemara`. That path is **relative to `cmd/go.mod`**: one `..` is the repo root, two `..` is the parent directory, so the clone lives next to the repo as a **sibling** (e.g. `projects/go-gemara` beside `projects/security-baseline`). No symlink is required. CI checks out [gemaraproj/go-gemara](https://github.com/gemaraproj/go-gemara) to `../go-gemara` relative to the workspace so the same layout applies. If you need a fork or branch that includes `CatalogToMarkdown`, set the checkout `ref` in `.github/workflows/cue-validate.yaml`.
 
 ### oscal
 

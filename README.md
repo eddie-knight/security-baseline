@@ -81,6 +81,8 @@ Use the `--help` flag for more options.
 
 This command assembles the YAML under `/baseline` into a single Gemara `ControlCatalog` and writes **Gemara YAML** by default (for `cue vet` and other tooling). With **`--markdown`**, it instead renders the catalog to **Markdown** using [`gemaraconv.CatalogToMarkdown`](https://pkg.go.dev/github.com/gemaraproj/go-gemara/gemaraconv#CatalogToMarkdown) from [go-gemara](https://github.com/gemaraproj/go-gemara).
 
+**Lexicon:** `baseline/lexicon.yaml` is always folded into Markdown export (autolinked terms plus a trailing **`## Lexicon`** glossary). **`--markdown-lexicon`** is only when the catalog declares **`metadata.lexicon`** and you want to load a **Gemara `Lexicon`** YAML artifact from `metadata.mapping-references` instead (that path overrides the inline list).
+
 Examples:
 
 ```bash
@@ -89,7 +91,19 @@ go run . gemara -b ../baseline -o ../build/baseline.gemara.yaml
 go run . gemara -b ../baseline --markdown -o ../build/baseline.md
 ```
 
-Use **`--no-toc`** with **`--markdown`** to omit the table of contents.
+Markdown export includes an **assessment-requirement × Requirements and Applicability matrix** (one row per requirement) by default. Markdown-only flags (each requires **`--markdown`**):
+
+| Flag | Effect |
+| :--- | :--- |
+| **`--no-toc`** | Omit the table of contents. |
+| **`--no-applicability-matrix`** | Omit the requirement × Requirements and Applicability matrix. |
+| **`--markdown-lexicon`** | Use `metadata.lexicon` + `metadata.mapping-references` to fetch **Gemara `Lexicon`** YAML (remote/file URL) for autolink + glossary, **instead of** `baseline/lexicon.yaml`. Requires `metadata.lexicon` to be set; otherwise this flag is a no-op. |
+
+Example combining options:
+
+```bash
+go run . gemara -b ../baseline --markdown --no-toc --markdown-lexicon -o ../build/baseline.md
+```
 
 The `go.mod` in `cmd/` uses `replace github.com/gemaraproj/go-gemara => ../../go-gemara`. That path is **relative to `cmd/go.mod`**: one `..` is the repo root, two `..` is the parent directory, so the clone lives next to the repo as a **sibling** (e.g. `projects/go-gemara` beside `projects/security-baseline`). No symlink is required. CI checks out [gemaraproj/go-gemara](https://github.com/gemaraproj/go-gemara) to `../go-gemara` relative to the workspace so the same layout applies. If you need a fork or branch that includes `CatalogToMarkdown`, set the checkout `ref` in `.github/workflows/cue-validate.yaml`.
 

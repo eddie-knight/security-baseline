@@ -14,15 +14,20 @@ import (
 )
 
 type gemaraOptions struct {
-	outPath      string
-	baselinePath string
-	markdown     bool
-	noTOC        bool
+	outPath                 string
+	baselinePath            string
+	markdown                bool
+	noTOC                   bool
+	noApplicabilityMatrix   bool
+	markdownLexicon         bool
 }
 
 func (o *gemaraOptions) Validate() error {
 	if o.baselinePath == "" {
 		return errors.New("baseline path not specified")
+	}
+	if !o.markdown && (o.noTOC || o.noApplicabilityMatrix || o.markdownLexicon) {
+		return errors.New("--no-toc, --no-applicability-matrix, and --markdown-lexicon require --markdown")
 	}
 	return nil
 }
@@ -42,6 +47,14 @@ func (o *gemaraOptions) AddFlags(cmd *cobra.Command) {
 		&o.noTOC, "no-toc", false,
 		"omit table of contents (only applies with --markdown)",
 	)
+	cmd.PersistentFlags().BoolVar(
+		&o.noApplicabilityMatrix, "no-applicability-matrix", false,
+		"omit assessment-requirement × applicability matrix (only applies with --markdown; matrix is included by default)",
+	)
+	cmd.PersistentFlags().BoolVar(
+		&o.markdownLexicon, "markdown-lexicon", false,
+		"load metadata.lexicon from mapping-references, autolink terms, append glossary (only with --markdown)",
+	)
 }
 
 func addGemara(parentCmd *cobra.Command) {
@@ -52,7 +65,11 @@ func addGemara(parentCmd *cobra.Command) {
 		Long: `Assembles the baseline YAML sources into a single Gemara ControlCatalog
 and writes it to a file or STDOUT. By default the output is Gemara YAML, which
 can be validated externally with cue vet. With --markdown, the same catalog is
-rendered as Markdown using github.com/gemaraproj/go-gemara/gemaraconv.`,
+rendered as Markdown using github.com/gemaraproj/go-gemara/gemaraconv.
+
+Markdown export includes baseline/lexicon.yaml by default (autolink + ## Lexicon) and
+an assessment-requirement × applicability matrix (one row per requirement). Optional flags: --no-toc, --no-applicability-matrix,
+--markdown-lexicon (use metadata.lexicon to fetch Gemara Lexicon YAML instead of the baseline list).`,
 		SilenceUsage:  false,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, _ []string) error {
@@ -84,6 +101,12 @@ rendered as Markdown using github.com/gemaraproj/go-gemara/gemaraconv.`,
 				mdOpts := []gemaraconv.MarkdownOption{}
 				if opts.noTOC {
 					mdOpts = append(mdOpts, gemaraconv.WithTOC(false))
+				}
+				if !opts.noApplicabilityMatrix {
+					mdOpts = append(mdOpts, gemaraconv.WithApplicabilityMatrix(true))
+				}
+				if opts.markdownLexicon {
+					mdOpts = append(mdOpts, gemaraconv.WithLexiconAutolink(true))
 				}
 				if err := gen.ExportGemaraMarkdown(bline, w, mdOpts...); err != nil {
 					return err

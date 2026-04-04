@@ -1,0 +1,2648 @@
+# Open Source Project Security Baseline - osps-baseline 
+
+_Open Source Project Security Baseline_ is a Gemara v1.0.0-rc.1 ControlCatalog by OSPS Baseline Authors (Human, `baseline-authors`).
+
+**Warning**: This is a draft, and should only be used as a preview of the upcoming artifact publication.
+
+### Description
+
+The Open Source Project Security (OSPS) Baseline is a set of security criteria that projects should meet to demonstrate a strong security posture.
+
+### Requirement Applicability Groups
+
+The following groups are used to specify the circumstance within which an assessment requirement is mandated.
+
+- **maturity-1** — Maturity Level 1: for any code or non-code project with any number of maintainers or users
+- **maturity-2** — Maturity Level 2: for any code project that has at least 2 maintainers and a small number of consistent users
+- **maturity-3** — Maturity Level 3: for any code project that has a large number of consistent users
+
+_Summary: 41 control(s), 65 assessment requirement(s)._
+
+## Table of contents
+
+- [Access Control](#ac)
+  - [OSPS-AC-01: Use MFA for Sensitive Actions
+](#osps-ac-01-use-mfa-for-sensitive-actions)
+  - [OSPS-AC-02: Restrict Collaborator Permissions
+](#osps-ac-02-restrict-collaborator-permissions)
+  - [OSPS-AC-03: Protect the Primary Branch from Accidental Modification
+](#osps-ac-03-protect-the-primary-branch-from-accidental-modification)
+  - [OSPS-AC-04: Enforce Least Privilege on CI/CD Pipelines
+](#osps-ac-04-enforce-least-privilege-on-ci-cd-pipelines)
+- [Build and Release](#br)
+  - [OSPS-BR-01: Prevent Untrusted Input When Building & Releasing
+](#osps-br-01-prevent-untrusted-input-when-building-releasing)
+  - [OSPS-BR-02: Assign Unique Version Identifiers
+](#osps-br-02-assign-unique-version-identifiers)
+  - [OSPS-BR-03: Use Encrypted Channels for Development & Release Activity
+](#osps-br-03-use-encrypted-channels-for-development-release-activity)
+  - [OSPS-BR-04: Publish Change Log With Release
+](#osps-br-04-publish-change-log-with-release)
+  - [OSPS-BR-05: Use Standardized Dependency Management Tools
+](#osps-br-05-use-standardized-dependency-management-tools)
+  - [OSPS-BR-06: Include Signatures and Hashes With Release
+](#osps-br-06-include-signatures-and-hashes-with-release)
+  - [OSPS-BR-07: Secure Secrets and Credentials
+](#osps-br-07-secure-secrets-and-credentials)
+- [Documentation](#do)
+  - [OSPS-DO-01: Publish User Guides for Basic Functionality
+](#osps-do-01-publish-user-guides-for-basic-functionality)
+  - [OSPS-DO-02: Provide Mechanisms for Reporting Defects
+](#osps-do-02-provide-mechanisms-for-reporting-defects)
+  - [OSPS-DO-03: Publish Provenance Verification Instructions
+](#osps-do-03-publish-provenance-verification-instructions)
+  - [OSPS-DO-04: Publish Support Scope and Duration
+](#osps-do-04-publish-support-scope-and-duration)
+  - [OSPS-DO-05: Document Security Update Scope and Duration
+](#osps-do-05-document-security-update-scope-and-duration)
+  - [OSPS-DO-06: Publish Dependency Management Policy
+](#osps-do-06-publish-dependency-management-policy)
+  - [OSPS-DO-07: Provide Instructions on How to Build From Source
+](#osps-do-07-provide-instructions-on-how-to-build-from-source)
+- [Governance](#gv)
+  - [OSPS-GV-01: Publish Project Roles and Responsibilities
+](#osps-gv-01-publish-project-roles-and-responsibilities)
+  - [OSPS-GV-02: Provide Public Discussion Mechanisms
+](#osps-gv-02-provide-public-discussion-mechanisms)
+  - [OSPS-GV-03: Publish Contribution Guide
+](#osps-gv-03-publish-contribution-guide)
+  - [OSPS-GV-04: Require Formal Review of Permission Grants
+](#osps-gv-04-require-formal-review-of-permission-grants)
+- [Legal](#le)
+  - [OSPS-LE-01: Require Code Contributors to Assert Right to Commit
+](#osps-le-01-require-code-contributors-to-assert-right-to-commit)
+  - [OSPS-LE-02: Ensure Project Licenses are Fully Open Source
+](#osps-le-02-ensure-project-licenses-are-fully-open-source)
+  - [OSPS-LE-03: Maintain and Release Licenses in a Well Known Location
+](#osps-le-03-maintain-and-release-licenses-in-a-well-known-location)
+- [Quality](#qa)
+  - [OSPS-QA-01: Publish Source Code and Change History
+](#osps-qa-01-publish-source-code-and-change-history)
+  - [OSPS-QA-02: Publish Software Dependencies
+](#osps-qa-02-publish-software-dependencies)
+  - [OSPS-QA-03: Address Pass/Fail Checks Before Accepting Changes
+](#osps-qa-03-address-pass-fail-checks-before-accepting-changes)
+  - [OSPS-QA-04: Enforce Security Requirements on All Codebases
+](#osps-qa-04-enforce-security-requirements-on-all-codebases)
+  - [OSPS-QA-05: Prevent Executables in the Codebase
+](#osps-qa-05-prevent-executables-in-the-codebase)
+  - [OSPS-QA-06: Use Automated Testing in CI/CD Pipelines
+](#osps-qa-06-use-automated-testing-in-ci-cd-pipelines)
+  - [OSPS-QA-07: Require Merge Approvals
+](#osps-qa-07-require-merge-approvals)
+- [Security Assessment](#sa)
+  - [OSPS-SA-01: Publish Design Descriptions of System Actors and Actions
+](#osps-sa-01-publish-design-descriptions-of-system-actors-and-actions)
+  - [OSPS-SA-02: Publish External Interface Descriptions
+](#osps-sa-02-publish-external-interface-descriptions)
+  - [OSPS-SA-03: Maintain a Project Security Assessment
+](#osps-sa-03-maintain-a-project-security-assessment)
+- [Vulnerability Management](#vm)
+  - [OSPS-VM-01: Publish Coordinated Vulnerability Disclosure Policy
+](#osps-vm-01-publish-coordinated-vulnerability-disclosure-policy)
+  - [OSPS-VM-02: Publish Contacts and Process for Reporting Vulnerabilities.
+](#osps-vm-02-publish-contacts-and-process-for-reporting-vulnerabilities)
+  - [OSPS-VM-03: Maintain Private Vulnerability Reporting Process
+](#osps-vm-03-maintain-private-vulnerability-reporting-process)
+  - [OSPS-VM-04: Publish Discovered Vulnerabilities
+](#osps-vm-04-publish-discovered-vulnerabilities)
+  - [OSPS-VM-05: Publish and Enforce a Dependency Remediation Policy
+](#osps-vm-05-publish-and-enforce-a-dependency-remediation-policy)
+  - [OSPS-VM-06: Publish and Enforce an Application Security Testing Policy
+](#osps-vm-06-publish-and-enforce-an-application-security-testing-policy)
+
+## Requirements and Applicability
+
+| Requirement | Maturity Level 1 | Maturity Level 2 | Maturity Level 3 |
+| :--- | :---: | :---: | :---: |
+| [**OSPS-AC-01.01**](#osps-ac-01-01) |X|X|X|
+| [**OSPS-AC-02.01**](#osps-ac-02-01) |X|X|X|
+| [**OSPS-AC-03.01**](#osps-ac-03-01) |X|X|X|
+| [**OSPS-AC-03.02**](#osps-ac-03-02) |X|X|X|
+| [**OSPS-AC-04.01**](#osps-ac-04-01) ||X|X|
+| [**OSPS-AC-04.02**](#osps-ac-04-02) |||X|
+| [**OSPS-BR-01.01**](#osps-br-01-01) |X|X|X|
+| [**OSPS-BR-01.03**](#osps-br-01-03) |X|X|X|
+| [**OSPS-BR-01.04**](#osps-br-01-04) |||X|
+| [**OSPS-BR-02.01**](#osps-br-02-01) ||X|X|
+| [**OSPS-BR-02.02**](#osps-br-02-02) |||X|
+| [**OSPS-BR-03.01**](#osps-br-03-01) |X|X|X|
+| [**OSPS-BR-03.02**](#osps-br-03-02) |X|X|X|
+| [**OSPS-BR-04.01**](#osps-br-04-01) ||X|X|
+| [**OSPS-BR-05.01**](#osps-br-05-01) ||X|X|
+| [**OSPS-BR-06.01**](#osps-br-06-01) ||X|X|
+| [**OSPS-BR-07.01**](#osps-br-07-01) |X|||
+| [**OSPS-BR-07.02**](#osps-br-07-02) |||X|
+| [**OSPS-DO-01.01**](#osps-do-01-01) |X|X|X|
+| [**OSPS-DO-02.01**](#osps-do-02-01) |X|X|X|
+| [**OSPS-DO-03.01**](#osps-do-03-01) |||X|
+| [**OSPS-DO-03.02**](#osps-do-03-02) |||X|
+| [**OSPS-DO-04.01**](#osps-do-04-01) |||X|
+| [**OSPS-DO-05.01**](#osps-do-05-01) |||X|
+| [**OSPS-DO-06.01**](#osps-do-06-01) ||X|X|
+| [**OSPS-DO-07.01**](#osps-do-07-01) ||X|X|
+| [**OSPS-GV-01.01**](#osps-gv-01-01) ||X|X|
+| [**OSPS-GV-01.02**](#osps-gv-01-02) ||X|X|
+| [**OSPS-GV-02.01**](#osps-gv-02-01) |X|X|X|
+| [**OSPS-GV-03.01**](#osps-gv-03-01) |X|X|X|
+| [**OSPS-GV-03.02**](#osps-gv-03-02) ||X|X|
+| [**OSPS-GV-04.01**](#osps-gv-04-01) |||X|
+| [**OSPS-LE-01.01**](#osps-le-01-01) ||X|X|
+| [**OSPS-LE-02.01**](#osps-le-02-01) |X|X|X|
+| [**OSPS-LE-02.02**](#osps-le-02-02) |X|X|X|
+| [**OSPS-LE-03.01**](#osps-le-03-01) |X|X|X|
+| [**OSPS-LE-03.02**](#osps-le-03-02) |X|X|X|
+| [**OSPS-QA-01.01**](#osps-qa-01-01) |X|X|X|
+| [**OSPS-QA-01.02**](#osps-qa-01-02) |X|X|X|
+| [**OSPS-QA-02.01**](#osps-qa-02-01) |X|X|X|
+| [**OSPS-QA-02.02**](#osps-qa-02-02) |||X|
+| [**OSPS-QA-03.01**](#osps-qa-03-01) ||X|X|
+| [**OSPS-QA-04.01**](#osps-qa-04-01) |X|X|X|
+| [**OSPS-QA-04.02**](#osps-qa-04-02) |||X|
+| [**OSPS-QA-05.01**](#osps-qa-05-01) |X|X|X|
+| [**OSPS-QA-05.02**](#osps-qa-05-02) |X|X|X|
+| [**OSPS-QA-06.01**](#osps-qa-06-01) ||X|X|
+| [**OSPS-QA-06.02**](#osps-qa-06-02) |||X|
+| [**OSPS-QA-06.03**](#osps-qa-06-03) |||X|
+| [**OSPS-QA-07.01**](#osps-qa-07-01) |||X|
+| [**OSPS-SA-01.01**](#osps-sa-01-01) ||X|X|
+| [**OSPS-SA-02.01**](#osps-sa-02-01) ||X|X|
+| [**OSPS-SA-03.01**](#osps-sa-03-01) ||X|X|
+| [**OSPS-SA-03.02**](#osps-sa-03-02) |||X|
+| [**OSPS-VM-01.01**](#osps-vm-01-01) ||X|X|
+| [**OSPS-VM-02.01**](#osps-vm-02-01) |X|||
+| [**OSPS-VM-03.01**](#osps-vm-03-01) ||X|X|
+| [**OSPS-VM-04.01**](#osps-vm-04-01) ||X|X|
+| [**OSPS-VM-04.02**](#osps-vm-04-02) |||X|
+| [**OSPS-VM-05.01**](#osps-vm-05-01) |||X|
+| [**OSPS-VM-05.02**](#osps-vm-05-02) |||X|
+| [**OSPS-VM-05.03**](#osps-vm-05-03) |||X|
+| [**OSPS-VM-06.01**](#osps-vm-06-01) |||X|
+| [**OSPS-VM-06.02**](#osps-vm-06-02) |||X|
+
+## AC: Access Control
+
+Access Control focuses on the mechanisms and
+policies that control access to the project's version
+control system and CI/CD pipelines. These controls help
+ensure that only authorized users can access sensitive
+data, modify repository settings, or execute build and
+release processes.
+
+### OSPS-AC-01: Use [MFA][Multi-factor Authentication] for Sensitive Actions
+
+**Objective**
+
+Reduce the risk of account compromise or insider threats by requiring
+[multi-factor authentication][Multi-factor Authentication] for [collaborators][Collaborator] modifying the [project][Project]
+[repository][Repository] settings or accessing [sensitive data][Sensitive Data].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-4(21) · AC-17 · CM-5 · CM-6 · IA-2 · IA-5 · 1.2e · 1.2f |
+| **[BPB][Best Practices Badge]** | CC-G-1 |
+| **BSI-TR-03185-2** | GV.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2d · 1.2e · 1.2f |
+| **[CSF][Cybersecurity Framework]** | PR.A-02 · PR.A-05 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 347-352 · 333-858 · 152-725 · 201-246 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 8.2.1 · 8.3.1 |
+| **PSSCRM** | G2.6 · P3.3 · E1.2 · E1.3 · E1.4 · E3.1 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Environment Management -Configuration Hardening Lvl1 |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 1.4.2 · Claim 2.1.5 · Claim 2.2.2 |
+
+#### OSPS-AC-01.01
+
+When a [user][User] attempts to read or modify a [sensitive resource][Sensitive Resource] in the [project][Project]'s
+authoritative [repository][Repository], the system MUST require the [user][User] to complete
+a [multi-factor authentication][Multi-factor Authentication] process.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Enforce [multi-factor authentication][Multi-factor Authentication] for the [project][Project]'s version
+control system, requiring [collaborators][Collaborator] to provide a second form of
+authentication when accessing [sensitive data][Sensitive Data] or modifying [repository][Repository]
+settings. Passkeys are acceptable for this control.
+
+### OSPS-AC-02: Restrict [Collaborator][Collaborator] Permissions
+
+**Objective**
+
+Reduce the risk of unauthorized access to the [project][Project]'s [repository][Repository] by
+limiting the permissions granted to new [collaborators][Collaborator].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-2 · AC-3 · AC-4(21) · AC-5 · AC-6 · CM-5 · CM-7 |
+| **BSI-TR-03185-2** | GV.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2f |
+| **[CSF][Cybersecurity Framework]** | PR.AA-02 · PR.AA-05 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 802-056 · 368-633 · 152-725 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 |
+| **PSSCRM** | P2.3 · E1.2 · E3.3 |
+| **[SSDF][Secure Software Development Framework]** | PO.2 · PO.3.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 2.2.2 |
+
+#### OSPS-AC-02.01
+
+When a new [collaborator][Collaborator] is added, the [version control system][Version Control System] MUST
+require manual permission assignment, or restrict the [collaborator][Collaborator]
+permissions to the lowest available privileges by default.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Most public [version control systems][Version Control System] are configured in this manner.
+Ensure the [project][Project]'s [version control system][Version Control System] always assigns the lowest
+available permissions to [collaborators][Collaborator] by default when added, granting
+additional permissions only when necessary.
+
+### OSPS-AC-03: Protect the [Primary Branch][Primary Branch] from Accidental Modification
+
+**Objective**
+
+Reduce the risk of accidental [changes][Change] or deletion of the [primary branch][Primary Branch]
+of the [project][Project]'s [repository][Repository] by preventing unintentional modification.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-3 · AC-5 · CM-3 · CM-3(2) · CM-5 |
+| **BSI-TR-03185-2** | GV.02 · QA.06 |
+| **[CRA][Cyber Resilience Act]** | 1.2f |
+| **[CSF][Cybersecurity Framework]** | PR.A-02 · PR.A-05 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 152-725 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 |
+| **PSSCRM** | P3.2 · P3.5 · E1.5 · E3.1 |
+| **Scorecard** | Branch-Protection |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 1.1.4 · Claim 2.2.2 |
+
+#### OSPS-AC-03.01
+
+When a direct [commit][Commit] is attempted on the [project][Project]'s [primary branch][Primary Branch],
+an enforcement mechanism MUST prevent the [change][Change] from being applied.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: If the [VCS][Version Control System] is centralized, set branch protection on the [primary branch][Primary Branch]
+in the [project][Project]'s [VCS][Version Control System]. Alternatively, use a decentralized approach,
+like the Linux kernel's, where [changes][Change] are first proposed in another
+[repository][Repository], and merging [changes][Change] into the primary [repository][Repository] requires a
+specific separate act.
+
+#### OSPS-AC-03.02
+
+When an attempt is made to delete the [project][Project]'s [primary branch][Primary Branch],
+the [version control system][Version Control System] MUST treat this as a sensitive activity
+and require explicit confirmation of intent.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Set branch protection on the [primary branch][Primary Branch] in the [project][Project]'s version
+control system to prevent deletion.
+
+### OSPS-AC-04: Enforce Least Privilege on [CI/CD Pipelines][CI/CD Pipeline]
+
+**Objective**
+
+Reduce the risk of unauthorized access to the [project][Project]'s build and [release][Release]
+processes by limiting the permissions granted to steps within the CI/CD
+pipelines.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-3(8) · AC-4 · AC-4(6) · AC-6 · AC-20 · AC-20(1) · CM-5 · CM-7 |
+| **[CRA][Cyber Resilience Act]** | 1.2d · 1.2e · 1.2f |
+| **[CSF][Cybersecurity Framework]** | PR.AA-02 · PR.AA-05 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 347-507 · 263-284 · 123-124 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 8.2.1 |
+| **PSSCRM** | P3.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Environment Management -Configuration Hardening Lvl1 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Producer - Choose an appropriate build platform · Build platform - Isolation strength - Isolated |
+| **[SSDF][Secure Software Development Framework]** | PO.2 · PO.3.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 2.1.1 · Claim 2.1.3 · Claim 2.2.2 |
+
+#### OSPS-AC-04.01
+
+When a CI/CD task is executed with no permissions specified, the
+CI/CD system MUST default the task's permissions to the lowest
+permissions granted in the pipeline.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Configure the [project][Project]'s settings to assign the lowest available
+permissions to new pipelines by default, granting additional
+permissions only when necessary for specific tasks.
+
+#### OSPS-AC-04.02
+
+When a job is assigned permissions in a [CI/CD pipeline][CI/CD Pipeline], the source
+[code][Code] or configuration MUST only assign the minimum privileges
+necessary for the corresponding activity.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Configure the [project][Project]'s [CI/CD pipelines][CI/CD Pipeline] to assign the lowest available
+permissions to [users][User] and services by default, elevating permissions
+only when necessary for specific tasks. In some version control
+systems, this may be possible at the organizational or [repository][Repository]
+level. If not, set permissions at the top level of the pipeline.
+
+## BR: Build and Release
+
+Build and Release focuses on the processes and
+tools used to compile, package, and distribute the
+project's software. These controls help ensure that the
+project's build and release pipelines are secure,
+consistent, and reliable, reducing the risk of
+vulnerabilities or errors in the software distribution
+process.
+
+### OSPS-BR-01: Prevent Untrusted Input When Building & Releasing
+
+**Objective**
+
+Reduce the risk of [code][Code] injection or other security vulnerabilities in the
+[project][Project]'s [build and release pipelines][Build and Release Pipeline] by preventing untrusted input from
+accessing privileged resources.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-3 · AC-4 · AC-4(21) · CM-5 · CM-7 · SI-7 |
+| **[CRA][Cyber Resilience Act]** | 1.2f |
+| **[CSF][Cybersecurity Framework]** | PR.AA-02 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 357-352 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 6.4.1 |
+| **PSSCRM** | P2.3 · P3.2 · P3.5 · E2.4 · E2.5 · D2.2 |
+| **Scorecard** | Dangerous-Workflow |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Choose an appropriate build platform |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PO.5.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 2.1.2 · Claim 2.2.2 |
+
+#### OSPS-BR-01.01
+
+When a [CI/CD pipeline][CI/CD Pipeline] operates on untrusted metadata, those
+parameters MUST be sanitized and validated prior to use in the
+pipeline.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: [CI/CD pipelines][CI/CD Pipeline] should sanitize (quote, escape or exit on expected
+values) all metadata inputs which correspond to untrusted sources.
+This includes data such as branch names, [commit][Commit] messages, tags, pull request titles,
+and author information.
+
+#### OSPS-BR-01.02
+
+Retired in https://github.com/ossf/security-baseline/pull/443
+
+#### OSPS-BR-01.03
+
+When a [CI/CD pipeline][CI/CD Pipeline] operates on untrusted [code][Code] snapshots, it MUST
+prevent access to privileged CI/CD credentials and assets.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: [CI/CD pipelines][CI/CD Pipeline] should isolate untrusted [code][Code] snapshots from
+privileged credentials and assets. In particular, [projects][Project] should be
+careful to ensure that workflows which build or execute [code][Code] prior
+to review by a [collaborator][Collaborator] do not have access to CI/CD credentials.
+
+#### OSPS-BR-01.04
+
+[CI/CD pipelines][CI/CD Pipeline] which accept trusted [collaborator][Collaborator] input MUST sanitize and
+validate that input prior to use in the pipeline.
+
+**Applicability:** maturity-3
+
+**Recommendation**: [CI/CD pipelines][CI/CD Pipeline] should sanitize (quote, escape or exit on expected
+values) all [collaborator][Collaborator] inputs on explicit workflow executions.
+While [collaborators][Collaborator] are generally trusted, manual inputs to a
+workflow cannot be reviewed and could be abused by an account
+takeover or insider threat.
+
+### OSPS-BR-02: Assign Unique [Version Identifiers][Version Identifier]
+
+**Objective**
+
+Ensure that each software asset produced by the [project][Project] is uniquely
+identified, enabling [users][User] to track [changes][Change] and updates to the [project][Project]
+over time.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | IA-4 · SA-15 · SI-7 · SR-4 |
+| **[BPB][Best Practices Badge]** | CC-B-5 · CC-B-6 · CC-B-7 |
+| **BSI-TR-03185-2** | BR.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2f |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.4.3 |
+| **PSSCRM** | G1.4 · E1.2 · E2.1 · E2.6 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Follow a consistent build process · Provenance generation- Exists, Authentic |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PS.1 · PS.2 · PS.3 |
+| **UKSSCOP** | Claim 1.1.4 · Claim 3.1.1 · Claim 3.4.2 |
+
+#### OSPS-BR-02.01
+
+When an official [release][Release] is created, that [release][Release] MUST be assigned a
+unique [version identifier][Version Identifier].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Assign a unique [version identifier][Version Identifier] to each [release][Release] produced by the
+[project][Project], following a consistent naming convention or numbering scheme.
+Examples include SemVer, CalVer, or git [commit][Commit] id.
+
+#### OSPS-BR-02.02
+
+When an official [release][Release] is created, all assets within that [release][Release]
+MUST be clearly associated with the [release][Release] identifier or another
+unique identifier for the asset.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Assign a unique [version identifier][Version Identifier] to each software asset produced by
+the [project][Project], following a consistent naming convention or numbering
+scheme. Examples include SemVer, CalVer, or git [commit][Commit] id.
+
+### OSPS-BR-03: Use Encrypted Channels for Development & [Release][Release] Activity
+
+**Objective**
+
+Protect the confidentiality and integrity of [project][Project] source [code][Code] during
+development, reducing the risk of eavesdropping or data tampering.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-4 · AC-4(21) |
+| **[BPB][Best Practices Badge]** | B-B-11 |
+| **BSI-TR-03185-2** | BR.03 |
+| **[CRA][Cyber Resilience Act]** | 1.2d · 1.2e · 1.2f · 1.2i · 1.2j · 1.2k |
+| **[OpenCRE][OpenCRE]** | 483-813 · 124-564 · 263-184 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 2.2.7 · 4.2.1 · 4.2.2 · 6.4.1 · 8.3.2 |
+| **PSSCRM** | E1.1 · E2.2 · E2.4 · E2.5 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Choose an appropriate build platform |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PO.5.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 3.1.2 |
+
+#### OSPS-BR-03.01
+
+When the [project][Project] lists a URI as an official [project][Project] channel, that URI
+MUST be exclusively delivered using encrypted channels.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Configure the [project][Project]'s websites and [version control systems][Version Control System] to use
+encrypted channels such as SSH or HTTPS for data transmission.
+Ensure all tools and domains referenced in [project][Project] documentation can
+only be accessed via encrypted channels.
+
+#### OSPS-BR-03.02
+
+When the [project][Project] lists a URI as an official distribution channel,
+that channel MUST be protected from adversary-in-the-middle
+attacks using cryptographically authenticated channels.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Artifacts distributed by the [project][Project] should be distributed through
+channels which ensure integrity and authenticity. Use of HTTPS for
+downloads, signed [releases][Release], or distribution through trusted package
+managers are all acceptable methods to protect against
+adversary-in-the-middle attacks.
+
+### OSPS-BR-04: Publish [Change][Change] Log With [Release][Release]
+
+**Objective**
+
+Provide transparency and accountability for [changes][Change] made to the [project][Project]'s
+software [releases][Release] in such a way that [users][User] can understand the
+modifications and improvements included in each [release][Release].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AU-2 · AU-6 · AU-10 · CM-5 · CM-6 · MA-1 · MA-8 · SI-4 · SI-5 |
+| **[BPB][Best Practices Badge]** | CC-B-8 · CC-B-9 · Q-B-7 · A-B-1 · A-S-1 |
+| **BSI-TR-03185-2** | BR.04 |
+| **[CRA][Cyber Resilience Act]** | 1.2d · 1.2f · 1.2h · 1.2j · 1.2l · 2.5 |
+| **[OpenCRE][OpenCRE]** | 483-813 · 068-486 · 124-564 · 757-271 · 347-352 · 263-184 · 208-355 · 745-356 · 732-148 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.1 · 6.4.1 · 6.5.1 · 6.5.2 · 10.2.2 |
+| **PSSCRM** | G1.4 · E2.1 · E2.4 · E2.5 · E3.1 · E3.6 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Choose an appropriate build platform · Follow a consistent build process · Build platform - Isolation strength - isolated |
+| **[SSDF][Secure Software Development Framework]** | PS.1 · PS.2 · PS.3 · PW.1.2 |
+| **UKSSCOP** | Claim 1.1.4 · Claim 2.2.3 · Claim 3.1.1 |
+
+#### OSPS-BR-04.01
+
+When an official [release][Release] is created, that [release][Release] MUST contain
+a descriptive log of functional and security
+modifications.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Ensure that all [releases][Release] include a descriptive [change][Change] log. It is
+recommended to ensure that the [change][Change] log is human-readable and
+includes details beyond [commit][Commit] messages, such as descriptions of the
+security impact or relevance to different use cases. To ensure
+machine readability, place the content under a markdown header
+such as "## Changelog".
+
+### OSPS-BR-05: Use Standardized Dependency Management Tools
+
+**Objective**
+
+Ensure that the [project][Project]'s [build and release pipelines][Build and Release Pipeline] use standardized tools
+and processes to manage dependencies, reducing the risk of compatibility
+issues or security vulnerabilities in the software.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-4 · CM-2 · CM-7(4) · CM-7(5) · RA-5 · SA-15 · SR-3 |
+| **[BPB][Best Practices Badge]** | Q-B-2 |
+| **[CRA][Cyber Resilience Act]** | 1.2b · 1.2d · 1.2f · 1.2h · 1.2j · 2.1 · 2.2 · 2.3 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 347-352 · 715-334 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.4.3 |
+| **PSSCRM** | P3.1 · P3.5 · E2.2 · E2.3 · E2.4 · E2.5 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build -Build Process Lvl2 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Isolation strength - isolated |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PS.1 · PS.2 |
+| **UKSSCOP** | Claim 1.2.1 · Claim 1.2.5 |
+
+#### OSPS-BR-05.01
+
+When a [build and release pipeline][Build and Release Pipeline] ingests dependencies, it MUST
+use standardized tooling where available.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Use a common tooling for your ecosystem, such as package managers or
+dependency management tools to ingest dependencies at build time. This
+may include using a dependency file, lock file, or manifest to specify
+the required dependencies, which are then pulled in by the build
+system.
+
+### OSPS-BR-06: Include Signatures and Hashes With [Release][Release]
+
+**Objective**
+
+Ensure [released software assets][Released Software Asset] can be verified by [users][User] to ensure
+integrity of each asset when it is used.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AU-10 · MP-1 · SA-15 · SI-7 · SI-7(14) |
+| **BSI-TR-03185-2** | BR.03 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 2.2.7 · 3.5.1 · 4.2.1 · 4.2.2 · 6.4.1 · 8.3.2 |
+| **PSSCRM** | P1.2 · P3.2 · P3.3 · E2.1 · E2.2 · E2.6 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Deployment -Deployment Process Lvl3 |
+| **Scorecard** | Signed-Releases |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Distribute provenance - Exists |
+| **[SSDF][Secure Software Development Framework]** | PO.5.2 · PS.2 · PS.2.1 · PW.6.2 |
+| **UKSSCOP** | Claim 1.2.2 · Claim 3.1.1 |
+
+#### OSPS-BR-06.01
+
+When an official [release][Release] is created, that [release][Release] MUST be signed or
+accounted for in a signed manifest including each asset's
+cryptographic hashes.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Sign all [released software assets][Released Software Asset] at build time with a cryptographic
+signature or attestations, such as GPG or PGP signature, Sigstore
+signatures, [SLSA][Supply-chain Levels for Software Artifacts] [provenance][Software Provenance], or [SLSA][Supply-chain Levels for Software Artifacts] VSAs. Include the cryptographic
+hashes of each asset in a signed manifest or metadata file.
+
+### OSPS-BR-07: Secure Secrets and Credentials
+
+**Objective**
+
+Ensure that data which can lead to security vulnerabilities or
+supply chain compromise is not disclosed, compromised, or misused.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[BPB][Best Practices Badge]** | S-B-5 |
+| **[SSDF][Secure Software Development Framework]** | PO.1.1 · P0.3.1 · P0.4.2 · PO.5.1 · PW.1.2 · PW.1.3 · PW.5.1 |
+| **UKSSCOP** | Claim 1.4.3 · Claim 1.4.5 |
+
+#### OSPS-BR-07.01
+
+The [project][Project] MUST prevent the unintentional storage of unencrypted [sensitive data][Sensitive Data], such as secrets and credentials, in the [version control system][Version Control System].
+
+**Applicability:** maturity-1
+
+**Recommendation**: Configure .gitignore or equivalent to exclude files that may contain sensitive information. Use pre-[commit][Commit] hooks and automated scanning tools to detect and prevent the inclusion of [sensitive data][Sensitive Data] in [commits][Commit].
+
+#### OSPS-BR-07.02
+
+The [project][Project] MUST define a policy for managing secrets and credentials used by the [project][Project]. The policy should include guidelines for storing, accessing, and rotating secrets and credentials.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Document how secrets and credentials are managed and used within the [project][Project]. This should include details on how secrets are stored (e.g., using a secrets management tool), how access is controlled, and how secrets are rotated or updated. Ensure that sensitive information is not hard-coded in the source [code][Code] or stored in [version control systems][Version Control System].
+
+## DO: Documentation
+
+Documentation focuses on the information
+provided to users, contributors, and maintainers
+of the project. These controls help ensure that
+the project's documentation is comprehensive,
+accurate, and up-to-date, enabling users to
+understand the project's features and functionality, maintenance, support,
+security and release practices.
+
+### OSPS-DO-01: Publish [User][User] Guides for Basic Functionality
+
+**Objective**
+
+Ensure that [users][User] have a clear and comprehensive understanding of the
+[project][Project]'s current features in order to prevent damage from misuse or
+misconfiguration.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CM-2 · PL-2 · PL-8 · SA-15 |
+| **[BPB][Best Practices Badge]** | B-B-1 · B-B-9 · B-S-7 · B-S-9 |
+| **BSI-TR-03185-2** | BR.01 |
+| **[CRA][Cyber Resilience Act]** | 1.2b · 1.2j · 1.2k |
+| **[CSF][Cybersecurity Framework]** | GV.OC-04 · GV.OC-05 |
+| **[ISO-18974][OpenChain]** | 4.1.4 |
+| **[OpenCRE][OpenCRE]** | 036-275 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 2.2.1 · 3.1.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.2.1 · 7.1.1 · 8.1.1 · 11.1.1 · 12.10.5 |
+| **PSSCRM** | G5.1 · E3.5 |
+| **[SSDF][Secure Software Development Framework]** | PW.1.2 |
+| **UKSSCOP** | 4.1 |
+
+#### OSPS-DO-01.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include [user][User] guides for all basic functionality.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Create [user][User] guides or documentation for all basic functionality of the
+[project][Project], explaining how to install, configure, and use the [project][Project]'s
+features. If there are any known dangerous or destructive actions
+available, include highly-visible warnings.
+
+### OSPS-DO-02: Provide Mechanisms for Reporting [Defects][Defect]
+
+**Objective**
+
+Enable [users][User] and [contributors][Contributor] to report [defects][Defect] or issues with the
+[released software assets][Released Software Asset], facilitating communication and collaboration on
+[defect][Defect] fixes and improvements.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | IR-6 · SI-4 · SI-5 |
+| **[BPB][Best Practices Badge]** | B-B-3 · R-B-1+ · R-B-1 · R-B-2 · R-S-2 |
+| **BSI-TR-03185-2** | QA.03 |
+| **[CRA][Cyber Resilience Act]** | 1.2c · 1.2l · 2.1 · 2.2 · 2.5 · 2.6 |
+| **[CSF][Cybersecurity Framework]** | RS.MA-02 · GV.RM-05 |
+| **[ISO-18974][OpenChain]** | 4.2.1 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.3.2 · 6.3.3 · 6.5.1 · 6.5.2 · 12.10.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Defect Management -Defect Tracking Lvl1 · Implementation -Defect Management -Defect Tracking Lvl2 |
+| **[SSDF][Secure Software Development Framework]** | PW.1.2 · RV.1.1 · RV.2.1 · RV.1.2 |
+| **UKSSCOP** | 1.1 · 1.3 |
+
+#### OSPS-DO-02.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include a guide for reporting [defects][Defect].
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: It is recommended that [projects][Project] use their [VCS][Version Control System] default issue tracker.
+If an external source is used, ensure that the [project][Project] documentation
+and contributing guide clearly and visibly explain how to use the
+reporting system. It is recommended that [project][Project] documentation also
+sets expectations for how [defects][Defect] will be triaged and resolved.
+
+### OSPS-DO-03: Publish [Provenance][Software Provenance] Verification Instructions
+
+**Objective**
+
+Enable [users][User] to verify the authenticity and integrity of the [project][Project]'s
+[released software assets][Released Software Asset], reducing the risk of using tampered or
+unauthorized versions of the software.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CM-2 · IR-1 · MP-1 · SA-15 · SI-7 · SI-7(14) |
+| **[BPB][Best Practices Badge]** | CC-B-8 |
+| **BSI-TR-03185-2** | BR.01 · BR.03 |
+| **[CRA][Cyber Resilience Act]** | 1.2d |
+| **[OpenCRE][OpenCRE]** | 171-222 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 3.1.1 · 3.5.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.2.1 · 7.1.1 · 8.1.1 · 11.1.1 |
+| **PSSCRM** | G1.3 · G2.5 · P1.2 · P3.1 · P3.2 · P3.3 · E2.6 |
+| **[SSDF][Secure Software Development Framework]** | PO.4.2 · PS.2 · PS.2.1 · PS.3.1 · RV.1.3 |
+| **UKSSCOP** | 3.1 |
+
+#### OSPS-DO-03.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+contain instructions to verify the integrity and authenticity of the
+[release][Release] assets.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Instructions in the [project][Project] should contain information about the
+technology used, the commands to run, and the expected output.
+When possible, avoid storing this documentation in the same location
+as the [build and release pipeline][Build and Release Pipeline] to avoid a single breach
+compromising both the software and the documentation for verifying the
+integrity of the software.
+
+#### OSPS-DO-03.02
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+contain instructions to verify the expected identity of the [person][User] or
+process authoring the software [release][Release].
+
+**Applicability:** maturity-3
+
+**Recommendation**: The expected identity may be in the form of key IDs used to sign,
+issuer and identity from a sigstore certificate, or other similar
+forms.
+When possible, avoid storing this documentation in the same location
+as the [build and release pipeline][Build and Release Pipeline] to avoid a single breach
+compromising both the software and the documentation for verifying the
+integrity of the software.
+
+### OSPS-DO-04: Publish Support Scope and Duration
+
+**Objective**
+
+Provide [users][User] with clear expectations regarding the [project][Project]'s support
+lifecycle in such a way that enables downstream consumers to ensure the
+continued functionality and security of their systems.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-1 · PL-2 · SI-4 |
+| **[BPB][Best Practices Badge]** | R-B-3 |
+| **BSI-TR-03185-2** | DE.01 |
+| **[ISO-18974][OpenChain]** | 4.1 · 4.3.1 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 3.1.1 · 3.2.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.3.3 · 7.1.1 · 8.1.1 · 11.1.1 |
+| **PSSCRM** | E1.6 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Operational Management -System Decommissioning -Legacy Management Lvl1 |
+| **[SSDF][Secure Software Development Framework]** | PO.4.2 · PS.3.1 · RV.1.3 |
+| **UKSSCOP** | 4.1 · 4.2 · Claim 4.1.1 · Claim 4.1.2 · Claim 4.2.1 |
+
+#### OSPS-DO-04.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include a descriptive statement about the scope and duration of
+support for each [release][Release].
+
+**Applicability:** maturity-3
+
+**Recommendation**: In order to communicate the scope and duration of support for the
+[project][Project]'s [released software assets][Released Software Asset], the [project][Project] should have a
+SUPPORT.md file, a "Support" section in SECURITY.md, or
+other documentation explaining the support lifecycle,
+including the expected duration of support for each [release][Release], the
+types of support provided (e.g., bug fixes, security updates), and
+any relevant policies or procedures for obtaining support.
+
+### OSPS-DO-05: Document Security Update Scope and Duration
+
+**Objective**
+
+Communicate when the [project][Project] [maintainers][Maintainer] will no longer fix [defects][Defect] or
+security vulnerabilities.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-1 · PL-2 · SI-4 · SI-5 |
+| **BSI-TR-03185-2** | DE.01 |
+| **[CRA][Cyber Resilience Act]** | 1.2c · 2.6 |
+| **[ISO-18974][OpenChain]** | 4.1.1 · 4.3.1 |
+| **[OpenCRE][OpenCRE]** | 673-475 · 053-751 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 3.1.1 · 3.2.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.3.2 · 7.1.1 · 8.1.1 · 11.1.1 |
+| **PSSCRM** | E1.6 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Operational Management -System Decommissioning -Legacy Management Lvl1 · Operations -Operational Management -System Decommissioning -Legacy Management Lvl2 |
+| **UKSSCOP** | 3.5 · 4.1 · Claim 4.1.1 · Claim 4.2.1 |
+
+#### OSPS-DO-05.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+provide a descriptive statement when [releases][Release] or versions will no
+longer receive security updates.
+
+**Applicability:** maturity-3
+
+**Recommendation**: In order to communicate the scope and duration of support for security
+fixes, the [project][Project] should have a SUPPORT.md or other documentation
+explaining the [project][Project]'s policy for security updates.
+
+### OSPS-DO-06: Publish Dependency Management Policy
+
+**Objective**
+
+Provide information about how the [project][Project] selects, obtains, and tracks
+third-party components that are required for the software to function.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-7 · CM-7(5) · CM-8 · PM-30 · RA-3(1) · SA-11 · SI-4 · SR-3 · SR-5 · SR-6 · SR-7 |
+| **[BPB][Best Practices Badge]** | A-S-1 |
+| **BSI-TR-03185-2** | QA.01 |
+| **[CRA][Cyber Resilience Act]** | 2.1 |
+| **[OpenCRE][OpenCRE]** | 613-286 · 053-751 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 3.1.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.3.2 · 6.4.3 · 7.1.1 · 8.1.1 · 11.1.1 · 12.5.2 |
+| **PSSCRM** | G1.4 · G2.4 · P3.1 · P3.2 · P3.4 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Design -Security Requirements -Supplier Security Lvl2 |
+| **Scorecard** | Pinned-Dependencies |
+| **UKSSCOP** | 1.2 · 3.3 · Claim 1.2.1 · Claim 1.2.2 |
+
+#### OSPS-DO-06.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include a description of how the [project][Project] selects, obtains, and tracks
+its dependencies.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: It is recommended to publish this information alongside the [project][Project]'s
+technical & design documentation on a publicly viewable resource such
+as the source [code][Code] [repository][Repository], [project][Project] website, or other channel.  
+
+### OSPS-DO-07: Provide Instructions on How to Build From Source
+
+**Objective**
+
+Ensure that [users][User] have a clear and comprehensive instructions on how
+to build the software from source [code][Code].
+
+#### OSPS-DO-07.01
+
+The [project][Project] documentation MUST
+include instructions on how to build the software, including required
+libraries, frameworks, SDKs, and dependencies.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: It is recommended to publish this information alongside the [project][Project]'s
+[contributor][Contributor] documentation, such as in `CONTRIBUTING.md` or other
+developer task documentation. This may also be documented using
+`Makefile` targets or other automation scripts.
+
+## GV: Governance
+
+Governance focuses on the policies and
+procedures that guide the project's decision-making
+and community interactions. These controls help ensure
+that the project is well positioned to respond to
+both threats and opportunities.
+
+### OSPS-GV-01: Publish [Project][Project] Roles and Responsibilities
+
+**Objective**
+
+Document [project][Project] roles and responsibilities to help [project][Project] participants,
+potential [contributors][Contributor], and downstream consumers understand who is working
+on the [project][Project] and what areas of authority they may have.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-2 · AC-3 · IA-2 · PL-1 · PL-4 · PM-30 |
+| **[BPB][Best Practices Badge]** | B-S-3 · B-S-4 |
+| **[OpenCRE][OpenCRE]** | 013-021 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.2 · 3.1.1 · 3.1.2 · 4.1.1 · 4.1.2 · 5.1.1 · 5.1.2 · 6.1.1 · 6.1.2 · 6.5.4 · 7.1.1 · 7.1.2 · 8.1.1 · 8.1.2 · 11.1.1 · 11.1.2 · 12.1.3 · 12.5.2 |
+| **PSSCRM** | G2.3 · E3.1 · E3.3 |
+| **UKSSCOP** | Claim 2.1.1 |
+
+#### OSPS-GV-01.01
+
+While active, the [project][Project] documentation MUST include a list of
+[project][Project] members with access to [sensitive resources][Sensitive Resource].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Document [project][Project] participants and their roles through such artifacts
+as members.md, governance.md, [maintainers][Maintainer].md, or similar file within
+the source [code][Code] [repository][Repository] of the [project][Project].
+This may be as simple as including names or account handles in a list
+of [maintainers][Maintainer], or more complex depending on the [project][Project]'s governance.
+
+#### OSPS-GV-01.02
+
+While active, the [project][Project] documentation MUST include descriptions of
+the roles and responsibilities for members of the [project][Project].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Document [project][Project] participants and their roles through such artifacts
+as members.md, governance.md, [maintainers][Maintainer].md, or similar file within
+the source [code][Code] [repository][Repository] of the [project][Project].
+
+### OSPS-GV-02: Provide Public Discussion Mechanisms
+
+**Objective**
+
+Encourage open communication and collaboration within the [project][Project]
+community by enabling [users][User] to provide feedback and discuss proposed
+[changes][Change] or usage challenges.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-21 · AU-6 · PL-1 |
+| **[BPB][Best Practices Badge]** | B-B-3 · B-B-12 |
+| **BSI-TR-03185-2** | QA.03 |
+| **[CRA][Cyber Resilience Act]** | 1.2l · 2.3 · 2.4 · 2.6 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 12.5.2 |
+| **[SSDF][Secure Software Development Framework]** | PS.3 · PW.1.2 |
+
+#### OSPS-GV-02.01
+
+While active, the [project][Project] MUST have one or more mechanisms for public
+discussions about proposed [changes][Change] and usage obstacles.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Establish one or more mechanisms for public discussions within the
+[project][Project], such as mailing lists, instant messaging, or issue trackers,
+to facilitate open communication and feedback.
+
+### OSPS-GV-03: Publish Contribution Guide
+
+**Objective**
+
+Provide guidance on how to participate in the [project][Project], outlining the steps
+required to submit [changes][Change] or enhancements to the [project][Project]'s codebase.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-3 · AC-20 · PL-1 |
+| **[BPB][Best Practices Badge]** | B-B-4 · B-S-3 · B-B-4+ · R-B-1 · Q-G-2 |
+| **BSI-TR-03185-2** | GV.01 · QA.04 · QA.05 |
+| **[CRA][Cyber Resilience Act]** | 1.2l · 2.4 |
+| **[ISO-18974][OpenChain]** | 4.1.2 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 6.5.4 · 8.2.1 · 12.5.2 |
+| **PSSCRM** | G2.4 · P2.2 |
+| **[SSDF][Secure Software Development Framework]** | PW.1.2 |
+| **UKSSCOP** | Claim 2.1.1 |
+
+#### OSPS-GV-03.01
+
+While active, the [project][Project] documentation MUST include an explanation
+of the contribution process.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Create a CONTRIBUTING.md or CONTRIBUTING/ directory to outline the
+contribution process including the steps for submitting [changes][Change], and
+engaging with the [project][Project] [maintainers][Maintainer].
+
+#### OSPS-GV-03.02
+
+While active, the [project][Project] documentation MUST include a guide for [code][Code]
+[contributors][Contributor] that includes requirements for acceptable contributions.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Extend the CONTRIBUTING.md or CONTRIBUTING/ contents in the [project][Project]
+documentation to outline the requirements for acceptable
+contributions, including coding standards, testing requirements, and
+submission guidelines for [code][Code] [contributors][Contributor]. It is recommended that
+this guide is the source of truth for both [contributors][Contributor] and approvers.
+
+### OSPS-GV-04: Require Formal Review of Permission Grants
+
+**Objective**
+
+Ensure that [code][Code] [contributors][Contributor] are vetted and reviewed before being granted
+elevated permissions to [sensitive resources][Sensitive Resource] within the [project][Project], reducing
+the risk of unauthorized access or misuse.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-2 · AC-3 · AC-4(21) · AC-5 · AC-6 · AC-20 · CM-7 · IR-4(6) · PM-30 · SI-4 |
+| **[BPB][Best Practices Badge]** | B-B-5 · B-S-3 · B-B-4+ · Q-G-2 |
+| **[CRA][Cyber Resilience Act]** | 1.2d · 1.2l · 2.1 · 2.2 · 2.5 · 2.6 |
+| **[CSF][Cybersecurity Framework]** | PR.AA-02 · PR.AA-05 |
+| **[ISO-18974][OpenChain]** | 4.1.2 |
+| **[OpenCRE][OpenCRE]** | 123-124 · 152-725 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 6.5.4 · 8.2.1 · 8.2.2 |
+| **PSSCRM** | E3.1 · E3.3 |
+| **[SSDF][Secure Software Development Framework]** | PO.2 · PO.3.2 |
+
+#### OSPS-GV-04.01
+
+While active, the [project][Project] documentation MUST have a policy that [code][Code]
+[collaborators][Collaborator] are reviewed prior to granting escalated permissions to
+[sensitive resources][Sensitive Resource].
+
+**Applicability:** maturity-3
+
+**Recommendation**: Publish an enforceable policy in the [project][Project] documentation that
+requires [code][Code] [collaborators][Collaborator] to be reviewed and approved before being
+granted escalated permissions to [sensitive resources][Sensitive Resource], such as merge
+approval or access to secrets. It is recommended that vetting includes
+establishing a justifiable lineage of identity such as confirming the
+[contributor][Contributor]'s association with a known trusted organization.
+
+## LE: Legal
+
+Legal focuses on the policies and
+procedures that govern the project's licensing
+and intellectual property. These controls help
+ensure that the project's source code is
+distributed under a recognized and legally
+enforceable open source software license,
+reducing the risk of intellectual property
+disputes or licensing violations.
+
+### OSPS-LE-01: Require [Code][Code] [Contributors][Contributor] to Assert Right to [Commit][Commit]
+
+**Objective**
+
+Ensure that [code][Code] [contributors][Contributor] are aware of and acknowledge their legal
+responsibility for the contributions they make to the [project][Project], reducing
+the risk of intellectual property disputes against the [project][Project].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-4 |
+| **[BPB][Best Practices Badge]** | B-S-1 |
+| **[CRA][Cyber Resilience Act]** | 1.2b · 1.2f |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 12.8.5 |
+| **PSSCRM** | E3.1 |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PS.1 · PW.1.2 · PW.2.1 |
+
+#### OSPS-LE-01.01
+
+While active, the [version control system][Version Control System] MUST require all [code][Code]
+[contributors][Contributor] to assert that they are legally authorized to make the
+associated contributions on every [commit][Commit].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Include a [DCO][Developer Certificate of Origin] in the [project][Project]'s [repository][Repository], requiring [code][Code]
+[contributors][Contributor] to assert that they are legally authorized to [commit][Commit] the
+associated contributions on every [commit][Commit]. Use a [status check][Status Check] to ensure
+the assertion is made. A [CLA][Contributor License Agreement] also satisfies this requirement.
+Some [version control systems][Version Control System], such as GitHub, may include this in the
+platform terms of service.
+
+It is understood that [projects][Project] with a lengthy history prior to
+adopting OSPS Baseline may not be able to retroactively enforce this
+requirement.
+
+### OSPS-LE-02: Ensure [Project][Project] [Licenses][License] are Fully Open Source
+
+**Objective**
+
+Ensure that the [project][Project]'s source [code][Code] is distributed under a recognized
+and legally enforceable open source software [license][License], providing clarity on
+how the [code][Code] can be used and shared by others.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-4 |
+| **[BPB][Best Practices Badge]** | B-B-6 · B-B-7 |
+| **BSI-TR-03185-2** | LE.01 |
+| **[CRA][Cyber Resilience Act]** | 1.2b |
+| **[CSF][Cybersecurity Framework]** | GV.OC-03 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 3.2.1 |
+| **PSSCRM** | G1.2 |
+| **Scorecard** | License |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 |
+
+#### OSPS-LE-02.01
+
+While active, the [license][License] for the source [code][Code] MUST meet the OSI Open
+Source Definition or the FSF Free Software Definition.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Add a [LICENSE][License] file to the [project][Project]'s [repo][Repository] with a [license][License] that is an
+approved [license][License] by the Open Source Initiative (OSI), or a free
+[license][License] as approved by the Free Software Foundation (FSF). Examples of
+such [licenses][License] include the MIT, BSD 2-clause, BSD 3-clause revised,
+Apache 2.0, Lesser GNU General Public [License][License] (LGPL), and the GNU
+General Public [License][License] (GPL). Releasing to the public domain meets
+this control if there are no other encumbrances such as patents.
+
+#### OSPS-LE-02.02
+
+While active, the [license][License] for the [released software assets][Released Software Asset] MUST meet
+the OSI Open Source Definition or the FSF Free Software Definition.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: If a different [license][License] is included with [released software assets][Released Software Asset],
+ensure it is an approved [license][License] by the Open Source Initiative (OSI),
+or a free [license][License] as approved by the Free Software Foundation (FSF).
+Examples of such [licenses][License] include the MIT, BSD 2-clause, BSD 3-clause
+revised, Apache 2.0, Lesser GNU General Public [License][License] (LGPL), and the
+GNU General Public [License][License] (GPL). Note that the [license][License] for the
+[released software assets][Released Software Asset] may be different than the source [code][Code].
+
+### OSPS-LE-03: Maintain and [Release][Release] [Licenses][License] in a Well Known Location
+
+**Objective**
+
+Ensure that the [project][Project]'s source [code][Code] and [released software assets][Released Software Asset] are
+distributed with the appropriate [license][License] terms, making it clear to [users][User]
+and [contributors][Contributor] how each can be used and shared.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-4 |
+| **[BPB][Best Practices Badge]** | B-B-8 |
+| **BSI-TR-03185-2** | LE.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2b |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 3.2.1 |
+| **PSSCRM** | G1.2 |
+| **Scorecard** | License |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 |
+
+#### OSPS-LE-03.01
+
+While active, the [license][License] for the source [code][Code] MUST be maintained in
+the corresponding [repository][Repository]'s [LICENSE][License] file, COPYING file, or
+[LICENSE][License]/ directory.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Include the [project][Project]'s source [code][Code] [license][License] in the [project][Project]'s [LICENSE][License]
+file, COPYING file, or [LICENSE][License]/ directory to provide visibility and
+clarity on the licensing terms. The filename MAY have an extension.
+If the [project][Project] has multiple [repositories][Repository], ensure that each [repository][Repository]
+includes the [license][License] file.
+
+#### OSPS-LE-03.02
+
+While active, the [license][License] for the [released software assets][Released Software Asset] MUST be
+included in the released source [code][Code], or in a [LICENSE][License] file, COPYING
+file, or [LICENSE][License]/ directory alongside the corresponding [release][Release]
+assets.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Include the [project][Project]'s [released software assets][Released Software Asset] [license][License] in the released
+source [code][Code], or in a [LICENSE][License] file, COPYING file, or [LICENSE][License]/ directory
+alongside the corresponding [release][Release] assets to provide visibility and
+clarity on the licensing terms. The filename MAY have an extension.
+If the [project][Project] has multiple [repositories][Repository], ensure that each [repository][Repository]
+includes the [license][License] file.
+
+## QA: Quality
+
+Quality focuses on the processes and
+practices used to ensure the quality and
+reliability of the project's source code and
+software assets. These controls help ensure
+that the project's source code is well
+maintained, secure, and reliable, reducing the
+risk of defects or vulnerabilities in the
+software.
+
+### OSPS-QA-01: Publish Source [Code][Code] and [Change][Change] History
+
+**Objective**
+
+Enable [users][User] to access and review the [project][Project]'s source [code][Code] and history,
+promoting transparency and collaboration within the [project][Project] community.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | RA-5 · SA-11 · SA-15 |
+| **[BPB][Best Practices Badge]** | CC-B-1 · CC-B-2 · CC-B-3 · R-B-5 |
+| **BSI-TR-03185-2** | QA.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2b · 1.2f · 1.2j |
+| **[CSF][Cybersecurity Framework]** | ID.AM-02 · ID.RA-01 · ID.RA-08 |
+| **[ISO-18974][OpenChain]** | 4.1.4 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 757-271 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 6.2.1 · 6.5.1 · 6.5.2 |
+| **PSSCRM** | P3.5 · E2.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build -Build Process Lvl1 |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Build platform - isolation strength - Isolated |
+| **[SSDF][Secure Software Development Framework]** | PS.1 · PS.2 · PS.3 · PW.1.2 · PW.2.1 |
+| **UKSSCOP** | Claim 2.2.3 |
+
+#### OSPS-QA-01.01
+
+While active, the [project][Project]'s source [code][Code] [repository][Repository] MUST be publicly
+readable at a static URL.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Use a common [VCS][Version Control System] such as GitHub, GitLab, or Bitbucket. Ensure the
+[repository][Repository] is publicly readable. Avoid duplication or mirroring of
+[repositories][Repository] unless highly visible documentation clarifies the primary
+source. Avoid frequent [changes][Change] to the [repository][Repository] that would impact the
+[repository][Repository] URL. Ensure the [repository][Repository] is public.
+
+#### OSPS-QA-01.02
+
+The [version control system][Version Control System] MUST contain a publicly readable record of
+all [changes][Change] made, who made the [changes][Change], and when the [changes][Change] were
+made.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Use a common [VCS][Version Control System] such as GitHub, GitLab, or Bitbucket to maintain a
+publicly readable [commit][Commit] history. Avoid squashing or rewriting [commits][Commit]
+in a way that would obscure the author of any [commits][Commit].
+
+### OSPS-QA-02: Publish Software Dependencies
+
+**Objective**
+
+Provide transparency and accountability for the [project][Project]'s dependencies
+while enabling [users][User] and [contributors][Contributor] to understand the software's direct
+dependencies.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-7 · CM-2 · CM-8 · PL-8 · RA-3(1) · RA-5 · SA-11 · SA-15 · SR-3 · SR-4 |
+| **[BPB][Best Practices Badge]** | Q-S-8 · Q-S-9 |
+| **BSI-TR-03185-2** | QA.01 |
+| **[CRA][Cyber Resilience Act]** | 2.1 · 2.2 · 2.3 |
+| **[CSF][Cybersecurity Framework]** | ID.AM.01 · ID.AM-02 |
+| **[ISO-18974][OpenChain]** | 4.1.5 · 4.3.1 |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 · 673-475 · 863-521 · 613-286 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.3.2 · 6.4.3 · 12.5.1 |
+| **PSSCRM** | G1.4 · G1.5 · G2.5 · P3.1 · P3.2 · P5.1 · P5.2 · E2.1 · E2.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build -Software Dependencies Lvl1 |
+| **[SSDF][Secure Software Development Framework]** | PO.3.3 · PS.1 · PS.2 · PS.3.2 · PW.4 |
+| **UKSSCOP** | Claim 1.2.1 · Claim 1.2.2 · Claim 3.1.1 |
+
+#### OSPS-QA-02.01
+
+When the package management system supports it, the source [code][Code]
+[repository][Repository] MUST contain a dependency list that accounts for the direct
+language dependencies.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: This may take the form of a package manager or language dependency file
+that enumerates all direct dependencies such as package.json, Gemfile,
+or go.mod.
+
+#### OSPS-QA-02.02
+
+When the [project][Project] has made a [release][Release], all compiled released software
+assets MUST be delivered with a [software bill of materials][Software Bill of Materials].
+
+**Applicability:** maturity-3
+
+**Recommendation**: It is recommended to auto-generate [SBOMs][Software Bill of Materials] at build time using a tool
+that has been vetted for accuracy. This enables [users][User] to ingest this
+data in a standardized approach alongside other [projects][Project] in their
+environment.
+
+### OSPS-QA-03: Address Pass/Fail Checks Before Accepting [Changes][Change]
+
+**Objective**
+
+Ensure that the [project][Project]'s approvers do not become accustomed to tolerating
+failing [status checks][Status Check], even if arbitrary, because it increases the risk of
+overlooking security vulnerabilities or [defects][Defect] identified by automated
+checks.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AU-6 · CM-3 · CM-6 · PL-8 · SA-11 · SA-15 · SR-3 |
+| **BSI-TR-03185-2** | QA.04 |
+| **[CRA][Cyber Resilience Act]** | 1.2f · 1.2k |
+| **[CSF][Cybersecurity Framework]** | ID.IM-02 |
+| **[ISO-18974][OpenChain]** | 4.1.5 |
+| **[OpenCRE][OpenCRE]** | 263-184 · 253-452 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.3.1 · 6.3.2 · 6.5.2 |
+| **PSSCRM** | G2.2 · G5.3 · G5.4 · P3.5 · P4.1 · P4.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build -Build Process Lvl3 · Implementation -Secure Build -Software Dependencies Lvl3 · Verification -Requirements Testing -Control Verification Lvl1 · Verification -Requirements Testing -Control Verification Lvl2 · Verification -Requirements Testing -Control Verification Lvl3 |
+| **[SSDF][Secure Software Development Framework]** | PO.4.1 · PS.1 · PS.2 · RV.1.2 |
+| **UKSSCOP** | Claim 1.3.2 · Claim 1.3.3 |
+
+#### OSPS-QA-03.01
+
+When a [commit][Commit] is made to the [primary branch][Primary Branch], any automated status
+checks for [commits][Commit] MUST pass or be manually bypassed.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Configure the [project][Project]'s [version control system][Version Control System] to require that all
+automated [status checks][Status Check] pass or require manual acknowledgement before a
+[commit][Commit] can be merged into the [primary branch][Primary Branch]. It is recommended that
+any optional [status checks][Status Check] are NOT configured as a pass or fail
+requirement that approvers may be tempted to bypass.
+
+### OSPS-QA-04: Enforce Security Requirements on All Codebases
+
+**Objective**
+
+Ensure that all codebases produced by the [project][Project] are well
+documented and held to the same security standard.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-8 · SA-15 |
+| **[CRA][Cyber Resilience Act]** | 1.2b · 1.2f |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.4.2 |
+| **PSSCRM** | G2.2 · G5.4 |
+| **Scorecard** | Binary-Artifacts |
+| **[SLSA][Supply-chain Levels for Software Artifacts]** | Build platform - isolation strength - Isolated |
+| **[SSDF][Secure Software Development Framework]** | PO.3.2 · PO.4.1 · PS.1 · PS.2 · RV.1.2 |
+
+#### OSPS-QA-04.01
+
+[Projects][Project] with multiple [repositories][Repository] MUST document a list of codebases
+that are part of the [project][Project].
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Document any additional [subproject][Subproject] [code][Code] [repositories][Repository] produced by the
+[project][Project] and compiled into a [release][Release]. This documentation should include
+the status and intent of the respective codebase.
+
+#### OSPS-QA-04.02
+
+When the [project][Project] has made a [release][Release] comprising multiple source [code][Code]
+[repositories][Repository], all [subprojects][Subproject] MUST enforce security requirements that
+are as strict or stricter than the primary codebase.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Any additional [subproject][Subproject] [code][Code] [repositories][Repository] produced by the [project][Project]
+and compiled into a [release][Release] must enforce security requirements as
+applicable to the status and intent of the respective codebase.
+In addition to following the corresponding OSPS Baseline requirements,
+this may include requiring a security review, ensuring that it is
+free of vulnerabilities, and ensuring that it is free of known
+security issues.
+
+### OSPS-QA-05: Prevent Executables in the Codebase
+
+**Objective**
+
+Reduce the risk of including generated executable artifacts in the
+[project][Project]'s [version control system][Version Control System], ensuring that only source [code][Code] and
+necessary files are stored in the [repository][Repository].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | PL-8 · SA-15 · SR-3 |
+| **BSI-TR-03185-2** | BR.05 |
+| **[CRA][Cyber Resilience Act]** | 1.2b |
+| **[OpenCRE][OpenCRE]** | 486-813 · 124-564 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.4.3 |
+| **[SSDF][Secure Software Development Framework]** | PS.1 · PS.2 |
+
+#### OSPS-QA-05.01
+
+While active, the [version control system][Version Control System] MUST NOT contain generated
+executable artifacts.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Remove generated executable artifacts in the [project][Project]'s version control
+system. It is recommended that any scenario where a generated
+executable artifact appears critical to a process such as testing, it
+should be instead be generated at build time or stored separately and
+fetched during a specific well-documented pipeline step.
+
+#### OSPS-QA-05.02
+
+While active, the [version control system][Version Control System] MUST NOT contain unreviewable
+binary artifacts.
+
+**Applicability:** maturity-1, maturity-2, maturity-3
+
+**Recommendation**: Do not add any unreviewable binary artifacts to the [project][Project]'s version
+control system. This includes executable application binaries, library
+files, and similar artifacts. It does not include assets such as
+graphical images, sound or music files, and similar content typically
+stored in a binary format.
+
+### OSPS-QA-06: Use Automated Testing in [CI/CD Pipelines][CI/CD Pipeline]
+
+**Objective**
+
+Ensure that the [project][Project] uses at least one [automated test suite][Automated Test Suite] for the
+source [code][Code] [repository][Repository] and clearly documents when and how tests are run.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | SA-11 · SA-15 · SR-3 |
+| **[BPB][Best Practices Badge]** | Q-B-4 · Q-B-8 · Q-B-9 · Q-B-10 · Q-S-2 |
+| **BSI-TR-03185-2** | QA.04 · QA.05 |
+| **[CRA][Cyber Resilience Act]** | 2.3 |
+| **[CSF][Cybersecurity Framework]** | ID.AM-02 |
+| **[ISO-18974][OpenChain]** | 4.1.5 |
+| **[OpenCRE][OpenCRE]** | 207-435 · 088-377 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.3 · 6.3.1 · 6.3.2 · 6.4.2 |
+| **PSSCRM** | P4.1 · P4.2 · P4.3 · P4.4 · E2.4 · E2.5 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Verification-Requirements -Testing -Control Verification Lvl1 · Verification-Requirements -Testing -Control Verification Lvl2 · Verification-Requirements -Testing -Control Verification Lvl3 · Verification -Security Testing -Scalable Baseline Lvl3 |
+| **Scorecard** | CI-Tests |
+| **[SSDF][Secure Software Development Framework]** | PW.8.2 |
+
+#### OSPS-QA-06.01
+
+Prior to a [commit][Commit] being accepted, the [project][Project]'s [CI/CD pipelines][CI/CD Pipeline] MUST
+run at least one [automated test suite][Automated Test Suite] to ensure the [changes][Change] meet
+expectations.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Automated tests should be run prior to every merge into the primary
+branch. The test suite should be run in a [CI/CD pipeline][CI/CD Pipeline] and the
+results should be visible to all [contributors][Contributor]. The test suite should
+be run in a consistent environment and should be run in a way that
+allows [contributors][Contributor] to run the tests locally.
+Examples of test suites include unit tests, integration tests, and
+end-to-end tests.
+
+#### OSPS-QA-06.02
+
+While active, [project][Project]'s documentation MUST clearly document when and
+how tests are run.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Add a section to the contributing documentation that explains how to
+run the tests locally and how to run the tests in the [CI/CD pipeline][CI/CD Pipeline].
+The documentation should explain what the tests are testing and how to
+interpret the results.
+
+#### OSPS-QA-06.03
+
+While active, the [project][Project]'s documentation MUST include a policy that
+all major [changes][Change] to the software produced by the [project][Project] should add
+or update tests of the functionality in an [automated test suite][Automated Test Suite].
+
+**Applicability:** maturity-3
+
+**Recommendation**: Add a section to the contributing documentation that explains the
+policy for adding or updating tests. The policy should explain what
+constitutes a major [change][Change] and what tests should be added or updated.
+
+### OSPS-QA-07: Require Merge Approvals
+
+**Objective**
+
+Ensure that the [project][Project]'s [version control system][Version Control System] requires at least one
+non-author human approval of [changes][Change] before merging into the [release][Release] or
+[primary branch][Primary Branch].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | AC-5 · AU-6 · PL-8 · SA-15 · SR-3 |
+| **[BPB][Best Practices Badge]** | B-G-3 |
+| **BSI-TR-03185-2** | QA.06 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.3.1 · 6.4.2 · 6.5.4 |
+| **PSSCRM** | G2.4 · P3.3 · P3.5 |
+| **Scorecard** | Code-Review |
+
+#### OSPS-QA-07.01
+
+When a [commit][Commit] is made to the [primary branch][Primary Branch], the [project][Project]'s version
+control system MUST require at least one non-author human approval of the
+[changes][Change] before merging.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Configure the [project][Project]'s [version control system][Version Control System] to require at least one
+non-author human approval of [changes][Change] before merging into the [release][Release] or
+[primary branch][Primary Branch]. This can be achieved by requiring a pull request to be
+reviewed and approved by at least one other [collaborator][Collaborator] before it can
+be merged.
+
+## SA: Security Assessment
+
+Security Assessment encourages practices that
+help ensure that the project is well positioned
+to identify and address security vulnerabilities
+and threats in the software.
+
+### OSPS-SA-01: Publish Design Descriptions of System Actors and Actions
+
+**Objective**
+
+Provide an overview of the [project][Project]'s design and architecture, illustrating
+the interactions and components of the system to help [contributors][Contributor] and
+security reviewers understand the internal logic of the released software
+assets.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CM-2 · PL-8 · RA-3 · SA-15 |
+| **[BPB][Best Practices Badge]** | B-B-1 · B-S-7 · B-S-8 |
+| **[CRA][Cyber Resilience Act]** | 1.2a · 1.2b |
+| **[CSF][Cybersecurity Framework]** | ID.AM-02 |
+| **[OpenCRE][OpenCRE]** | 155-155 · 326-704 · 068-102 · 036-275 · 162-655 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 2.2.3 · 2.2.4 · 2.2.5 · 2.2.6 · 3.1.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.2.1 · 7.1.1 · 8.1.1 · 11.1.1 · 12.3.1 · 12.5.3 |
+| **PSSCRM** | G5.1 · P1.1 · E3.4 · E3.7 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Operational Management -Data Protection Lvl2 |
+| **[SSDF][Secure Software Development Framework]** | PO.1 · PO.2 · PO.3.2 |
+| **UKSSCOP** | Claim 1.1.5 |
+
+#### OSPS-SA-01.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include design documentation demonstrating all actions and actors
+within the system.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Include designs in the [project][Project] documentation that explains the actions
+and actors. Actors include any subsystem or entity that can influence
+another segment in the system.
+Ensure this is updated for new features or breaking [changes][Change].
+
+### OSPS-SA-02: Publish External Interface Descriptions
+
+**Objective**
+
+Provide [users][User] and developers with an understanding of how to interact with
+the [project][Project]'s software and integrate it with other systems, enabling them
+to use the software effectively.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CM-2 · PL-2 · PL-8 · RA-3 · SA-15 |
+| **[BPB][Best Practices Badge]** | B-B-10 · B-S-7 |
+| **[CRA][Cyber Resilience Act]** | 1.2a · 1.2b |
+| **[CSF][Cybersecurity Framework]** | GV.OC-05 · ID.AM-01 |
+| **[ISO-18974][OpenChain]** | 4.1.4 |
+| **[OpenCRE][OpenCRE]** | 155-155 · 068-102 · 072-713 · 820-878 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.1 · 2.2.3 · 2.2.4 · 2.2.5 · 2.2.6 · 6.2.1 · 12.3.1 · 12.8.1 |
+| **PSSCRM** | E3.4 · E3.7 |
+| **[SSDF][Secure Software Development Framework]** | PW.1.2 |
+| **UKSSCOP** | Claim 1.1.5 |
+
+#### OSPS-SA-02.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] documentation MUST
+include descriptions of all external software interfaces of the
+[released software assets][Released Software Asset].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Document all software interfaces (APIs) of the released software
+assets, explaining how [users][User] can interact with the software and what
+data is expected or produced.
+Ensure this is updated for new features or breaking [changes][Change].
+
+### OSPS-SA-03: Maintain a [Project][Project] Security Assessment
+
+**Objective**
+
+Provide [project][Project] [maintainers][Maintainer] an understanding of how the software can be
+misused or broken, enabling them to plan mitigations accordingly.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-2 · CA-2(3) · PM-30 · RA-3 · SA-11 · SA-15 · SA-15(3) · SA-15(8) · SI-3 · SR-3 · SR-3(3) · SR-6 · SR-7 |
+| **[BPB][Best Practices Badge]** | B-S-8 · S-G-1 |
+| **[CRA][Cyber Resilience Act]** | 1.1 · 1.2j · 1.2k · 2.2 |
+| **[CSF][Cybersecurity Framework]** | ID.RA-01 · ID.RA-04 · ID.RA-05 · DE.AE-07 |
+| **[ISO-18974][OpenChain]** | 4.1.5 |
+| **[OpenCRE][OpenCRE]** | 068-102 · 154-031 · 888-770 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.2.4 · 2.2.5 · 2.2.6 · 6.2.1 · 6.2.3.1 · 6.3.2 · 6.4.2 · 11.3.1 · 12.3.1 |
+| **PSSCRM** | G4.3 · G5.2 · P2.1 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Governance -Create and Promote Lvl1 · Design -Threat Assessment -Application Risk Profile Lvl1 · Design -Threat Assessment -Threat Modeling Lvl1 · Verification -Architecture Assessment -Architecture Mitigation Lvl2 |
+| **[SSDF][Secure Software Development Framework]** | PO.5.1 · PW.1.1 |
+| **UKSSCOP** | Claim 1.4.1 |
+
+#### OSPS-SA-03.01
+
+When the [project][Project] has made a [release][Release], the [project][Project] MUST perform a
+security assessment to understand the most likely and impactful
+potential security problems that could occur within the software.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Performing a security assessment informs both [project][Project] members as well
+as downstream consumers that the [project][Project] understands what problems
+could arise within the software. Understanding what threats could be
+realized helps the [project][Project] manage and address risk. This information
+is useful to downstream consumers to demonstrate the security acumen
+and practices of the [project][Project].
+Ensure this is updated for new features or breaking [changes][Change].
+
+#### OSPS-SA-03.02
+
+When the [project][Project] has made a [release][Release], the [project][Project] MUST perform a threat
+modeling and [attack surface analysis][Attack Surface Analysis] to understand and protect against
+attacks on critical [code][Code] paths, functions, and interactions within the
+system.
+
+**Applicability:** maturity-3
+
+**Recommendation**: [Threat modeling][Threat Modeling] is an activity where the [project][Project] looks at the
+codebase, associated processes and infrastructure, interfaces, key
+components and "thinks like a hacker" and brainstorms how the system
+be be broken or compromised. Each identified threat is listed out so
+the [project][Project] can then think about how to proactively avoid or close off
+any gaps/vulnerabilities that could arise.
+Ensure this is updated for new features or breaking [changes][Change].
+
+## VM: Vulnerability Management
+
+Vulnerability Management focuses on the
+processes and practices used to identify and
+address security vulnerabilities in the project's
+software dependencies. These controls help ensure
+that the project is well positioned to respond to
+security threats and vulnerabilities in the software.
+
+### OSPS-VM-01: Publish [Coordinated Vulnerability Disclosure][Coordinated Vulnerability Disclosure] Policy
+
+**Objective**
+
+Establish a process for reporting and addressing vulnerabilities in the
+[project][Project], ensuring that security issues are handled promptly and
+transparently.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | IR-1 · IR-4 · IR-6 · IR-7(1) · IR-8 · SI-2 |
+| **[BPB][Best Practices Badge]** | R-B-6 · R-B-8 · R-S-2 · S-B-14 · S-B-15 |
+| **BSI-TR-03185-2** | VM.01 |
+| **[CRA][Cyber Resilience Act]** | 2.1 · 2.2 · 2.3 · 2.6 · 2.7 · 2.8 |
+| **[CSF][Cybersecurity Framework]** | GV.PO-01 · GV.PO-02 · ID.RA-01 · ID.RA-08 |
+| **[ISO-18974][OpenChain]** | 4.1.5 · 4.2.1 · 4.3.2 |
+| **[OpenCRE][OpenCRE]** | 887-750 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 2.1.1 · 3.1.1 · 4.1.1 · 5.1.1 · 6.1.1 · 6.3.1 · 6.3.2 · 7.1.1 · 8.1.1 · 11.1.1 · 11.2.1 · 12.1.1 · 12.1.3 |
+| **PSSCRM** | D1.1 · D1.2 · D1.3 · D1.5 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Governance -Create and Promote Lvl2 · Governance -Policy & Compliance -Policy & Standards Lvl1 · Implementation -Defect Management -Defect Tracking Lvl1 · Implementation -Defect Management -Defect Tracking Lvl2 · Implementation -Defect Management -Defect Tracking Lvl3 · Operations -Incident Management -Incident Response Lvl1 · Operations -Incident Management -Incident Response Lvl2 · Operations -Incident Management -Incident Response Lvl3 |
+| **Scorecard** | Security-Policy |
+| **[SSDF][Secure Software Development Framework]** | RV.1.3 |
+| **UKSSCOP** | Claim 3.4.1 · Claim 3.5.1 · Claim 4.1.2 |
+
+#### OSPS-VM-01.01
+
+While active, the [project][Project] documentation MUST
+include a policy for [coordinated vulnerability disclosure][Coordinated Vulnerability Disclosure] ([CVD][Coordinated Vulnerability Disclosure]), with a clear
+timeframe for response.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Create a SECURITY.md file at the root of the directory, outlining the
+[project][Project]'s policy for [coordinated vulnerability disclosure][Coordinated Vulnerability Disclosure]. Include a
+method for reporting vulnerabilities. Set expectations for how the
+[project][Project] will respond and address reported issues.
+
+### OSPS-VM-02: Publish Contacts and Process for Reporting Vulnerabilities.
+
+**Objective**
+
+Enable external parties, such as researchers, to easily understand who they
+should contact in the event that a vulnerability is found, and what process
+they should follow.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | IR-1 · IR-4 · IR-6 · IR-8 |
+| **[BPB][Best Practices Badge]** | B-S-8 |
+| **BSI-TR-03185-2** | VM.01 |
+| **[CRA][Cyber Resilience Act]** | 2.5 |
+| **[CSF][Cybersecurity Framework]** | GV.PO-01 · GV.PO-02 · ID.RA-01 |
+| **[ISO-18974][OpenChain]** | 4.1.1 · 4.1.3 · 4.1.5 · 4.2.2 |
+| **[OpenCRE][OpenCRE]** | 464-513 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.3.3 · 12.1.1 · 12.10.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Governance -Policy&Compliance -Policy&Standards Lvl2 |
+| **Scorecard** | Security-Policy |
+| **[SSDF][Secure Software Development Framework]** | RV.1.3 |
+| **UKSSCOP** | 3.2 |
+
+#### OSPS-VM-02.01
+
+While active, the [project][Project] documentation MUST contain
+security contacts.
+
+**Applicability:** maturity-1
+
+**Recommendation**: Create a security.md (or similarly-named) file that contains security
+contacts for the [project][Project].
+
+### OSPS-VM-03: Maintain [Private Vulnerability Reporting][Private Vulnerability Reporting] Process
+
+**Objective**
+
+Provide a means for reporting privately to the security contacts within
+the [project][Project] so that security vulnerabilities are not be shared with the
+public until the [project][Project] has been provided time to analyze and prepare
+remediations to protect [users][User] of the [project][Project].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | IR-6 |
+| **[BPB][Best Practices Badge]** | R-B-7 |
+| **BSI-TR-03185-2** | VM.01 |
+| **[CRA][Cyber Resilience Act]** | 2.5 · 2.6 |
+| **[OpenCRE][OpenCRE]** | 308-514 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.3.1 · 6.3.3 · 12.10.2 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Operations -Incident Management -Incident Response Lvl3 |
+| **UKSSCOP** | 3.2 |
+
+#### OSPS-VM-03.01
+
+While active, the [project][Project] documentation MUST
+provide a means for [private vulnerability reporting][Private Vulnerability Reporting] directly to
+the security contacts within the [project][Project].
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Provide a means for security researchers to report vulnerabilities
+privately to the [project][Project]. This may be a dedicated email address, a
+web form, [VCS][Version Control System] specialized tools, email addresses for security
+contacts, or other methods.
+
+### OSPS-VM-04: Publish Discovered Vulnerabilities
+
+**Objective**
+
+Ensure that [project][Project] end [users][User] have a well known mechanism to understand
+vulnerabilities found within the [project][Project].
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-7 · CM-3 · CM-8 · IR-5 · SI-2 · SI-4 · SI-5 |
+| **BSI-TR-03185-2** | VM.02 |
+| **[CRA][Cyber Resilience Act]** | 1.2a · 1.2b · 2.1 · 2.4 · 2.6 |
+| **[CSF][Cybersecurity Framework]** | ID.RA-01 |
+| **[ISO-18974][OpenChain]** | 4.1.5 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.3 · 6.3.1 · 6.3.2 · 6.3.3 · 11.3.1 |
+| **PSSCRM** | G2.2 · D1.1 |
+| **[SSDF][Secure Software Development Framework]** | PO.4.1 · RV.2.1 · RV.2.2 |
+| **UKSSCOP** | 3.4 · 3.5 · 4.3 |
+
+#### OSPS-VM-04.01
+
+While active, the [project][Project] documentation MUST
+publicly publish data about discovered vulnerabilities.
+
+**Applicability:** maturity-2, maturity-3
+
+**Recommendation**: Provide information about [known vulnerabilities][Known Vulnerabilities] in a predictable
+public channel, such as a CVE entry, blog post, or other medium.
+To the degree possible, this information should include affected
+version(s), how a consumer can determine if they are vulnerable, and
+instructions for mitigation or remediation.
+
+#### OSPS-VM-04.02
+
+While active, any vulnerabilities in the
+software components not affecting the [project][Project] MUST be accounted for
+in a VEX document, augmenting the vulnerability report with
+non-exploitability details.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Establish a VEX feed communicating the exploitability status of
+[known vulnerabilities][Known Vulnerabilities], including assessment details or any
+mitigations in place preventing vulnerable [code][Code] from being
+executed.
+
+### OSPS-VM-05: Publish and Enforce a Dependency Remediation Policy
+
+**Objective**
+
+Identify and address [defects][Defect] and security weaknesses in the [project][Project]'s
+imported [code][Code] early in the development process, reducing the risk of
+shipping insecure software.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-7 · RA-5 · SA-11 · SI-2 · SI-3 |
+| **[BPB][Best Practices Badge]** | B-S-8 · Q-B-12 · Q-S-9 · S-B-14 · S-B-15 · A-B-1 · A-B-3 · A-B-8 · A-S-1 |
+| **[CRA][Cyber Resilience Act]** | 1.2a · 1.2b · 1.2c · 2.1 · 2.2 · 2.3 · 2.4 |
+| **[CSF][Cybersecurity Framework]** | GV.RM-05 · GV.RM-06 · GV.PO-01 · GV.PO-02 · ID.RA-01 · ID.RA-08 · ID.IM-02 |
+| **[ISO-18974][OpenChain]** | 4.1.5 · 4.2.1 · 4.2.2 · 4.3.2 |
+| **[OpenCRE][OpenCRE]** | 155-155 · 124-564 · 757-271 · 464-513 · 611-158 · 207-435 · 088-377 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.3 · 6.3.1 · 6.3.2 · 6.4.1 · 6.4.2 |
+| **PSSCRM** | G5.4 · P4.1 · P4.2 · P4.3 · P4.4 · P4.5 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build-Build Process Lvl3 · Implementation -Software Dependencies Lvl3 · Verification -Security Testing -Scalable Baseline Lvl1 · Verification -Security Testing -Scalable Baseline Lvl3 |
+| **Scorecard** | Security-Policy · Vulnerabilities |
+| **[SSDF][Secure Software Development Framework]** | PO.4 · PW.1.2 · PW.8.1 · RV.1.2 · RV.1.3 · RV.2.1 · RV.2.2 |
+| **UKSSCOP** | 1.2 · 3.3 |
+
+#### OSPS-VM-05.01
+
+While active, the [project][Project] documentation MUST include a policy that
+defines a threshold for remediation of [SCA][Software Composition Analysis] findings related to
+vulnerabilities and [licenses][License].
+
+**Applicability:** maturity-3
+
+**Recommendation**: Document a policy in the [project][Project] that defines a threshold for
+remediation of [SCA][Software Composition Analysis] findings related to vulnerabilities and [licenses][License].
+Include the process for identifying, prioritizing, and remediating
+these findings.
+
+#### OSPS-VM-05.02
+
+While active, the [project][Project] documentation MUST include a policy to
+address [SCA][Software Composition Analysis] violations prior to any [release][Release].
+
+**Applicability:** maturity-3
+
+**Recommendation**: Document a policy in the [project][Project] to address applicable Software
+Composition Analysis results before any [release][Release], and add [status checks][Status Check]
+that verify compliance with that policy prior to [release][Release].
+
+#### OSPS-VM-05.03
+
+While active, all [changes][Change] to the [project][Project]'s codebase MUST be
+automatically evaluated against a documented policy for malicious
+dependencies and [known vulnerabilities][Known Vulnerabilities] in dependencies, then blocked
+in the event of violations, except when declared and suppressed as
+non-exploitable.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Create a [status check][Status Check] in the [project][Project]'s [version control system][Version Control System] that
+runs a [Software Composition Analysis][Software Composition Analysis] tool on all [changes][Change]
+to the codebase. Require that the [status check][Status Check] passes before [changes][Change]
+can be merged.
+
+### OSPS-VM-06: Publish and Enforce an Application Security Testing Policy
+
+**Objective**
+
+Identify and address [defects][Defect] and security weaknesses in the [project][Project]'s
+codebase early in the development process, reducing the risk of shipping
+insecure software.
+
+#### Guidelines
+
+This control aids in the application of the following guidelines:
+
+| Source | References |
+| :--- | :--- |
+| **[800-161][NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]** | CA-7 · RA-5 · SA-11 · SI-2 · SI-3 |
+| **[BPB][Best Practices Badge]** | B-S-8 · Q-B-12 · Q-S-9 · S-B-14 · S-B-15 · A-B-1 · A-B-3 · A-B-8 · A-S-1 |
+| **BSI-TR-03185-2** | QA.05 |
+| **[CRA][Cyber Resilience Act]** | 1.2a · 1.2b · 1.2c · 2.1 · 2.2 · 2.3 · 2.4 |
+| **[CSF][Cybersecurity Framework]** | GV.RM-05 · GV.RM-06 · GV.PO-01 · GV.PO-02 · ID.RA-01 · ID.RA-08 · ID.IM-02 |
+| **[ISO-18974][OpenChain]** | 4.1.5 · 4.2.1 · 4.2.2 · 4.3.2 |
+| **[OpenCRE][OpenCRE]** | 155-155 · 124-564 · 757-271 · 464-513 · 611-158 · 207-435 · 088-377 |
+| **[PCIDSS][Payment Card Industry Data Security Standard]** | 6.2.3 · 6.3.1 · 6.3.2 · 6.4.1 · 6.4.2 · 6.5.2 |
+| **PSSCRM** | G5.4 · P4.1 · P4.2 · P4.3 · P4.4 · P4.5 |
+| **[SAMM][OWASP Software Assurance Maturity Model]** | Implementation -Secure Build-Build Process Lvl3 · Implementation -Software Dependencies Lvl3 · Verification -Security Testing -Scalable Baseline Lvl1 · Verification -Security Testing -Scalable Baseline Lvl3 |
+| **Scorecard** | Security-Policy · Vulnerabilities · SAST |
+| **[SSDF][Secure Software Development Framework]** | PO.4 · PW.1.2 · PW.8.1 · RV.1.2 · RV.1.3 · RV.2.1 · RV 2.2 |
+| **UKSSCOP** | 1.3 · 1.4 |
+
+#### OSPS-VM-06.01
+
+While active, the [project][Project] documentation MUST include a policy that
+defines a threshold for remediation of SAST findings.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Document a policy in the [project][Project] that defines a threshold for
+remediation of Static Application Security Testing (SAST) findings.
+Include the process for identifying, prioritizing, and remediating
+these findings.
+
+#### OSPS-VM-06.02
+
+While active, all [changes][Change] to the [project][Project]'s codebase MUST be
+automatically evaluated against a documented policy for security
+weaknesses and blocked in the event of violations except when declared
+and suppressed as non-exploitable.
+
+**Applicability:** maturity-3
+
+**Recommendation**: Create a [status check][Status Check] in the [project][Project]'s [version control system][Version Control System] that
+runs a Static Application Security Testing (SAST) tool on all [changes][Change]
+to the codebase. Require that the [status check][Status Check] passes before [changes][Change]
+can be merged.
+
+### Mapping References
+
+- **800-161** — NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations (vr1-upd1) — [link](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-161r1-upd1.pdf)
+
+  This publication provides guidance to organizations on identifying, assessing, and mitigating cybersecurity risks throughout the supply chain at all levels of their organizations. The publication integrates cybersecurity supply chain risk management (C-SCRM) into risk management activities by applying a multilevel, C-SCRM-specific approach, including guidance on the development of C-SCRM strategy implementation plans, C-SCRM policies, C-SCRM plans, and risk assessments for products and services.
+- **BPB** — OpenSSF Best Practices Badge (v2024) — [link](https://github.com/coreinfrastructure/best-practices-badge/blob/main/criteria/criteria.yml)
+
+  The Open Source Security Foundation (OpenSSF) Best Practices Badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The OpenSSF Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and, as a result, are more likely to produce higher-quality secure software.
+- **BSI-TR-03185-2** — BSI TR-03185-2 Secure Software Lifecycle for Open Source Software (vv1.1.0) — [link](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03185/BSI-TR-03185-2.pdf?__blob=publicationFile&v=5)
+
+  Secure software is essential for the use of IT products in governments, businesses and societies.
+- **CRA** — Cyber Resilience Act (v20.11.2024) — [link](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402847#tit_1)
+
+  Regulation (EU) 2024/2847 of the European Parliament and of the Council of 23 October 2024 on horizontal cybersecurity requirements for products with digital elements and amending Regulations (EU) No 168/2013 and (EU) 2019/1020 and Directive (EU) 2020/1828 (Cyber Resilience Act) (Text with EEA relevance)
+- **CSAG** — CISA Software Acquisition Guide (v2024-08-01) — [link](https://www.cisa.gov/resources-tools/resources/software-acquisition-guide-government-enterprise-consumers-software-assurance-cyber-supply-chain)
+
+  The Software Acquisition Guide for Government Enterprise Consumers: Software Assurance in the Cyber-Supply Chain Risk Management (C-SCRM) Lifecycle product was developed in response to the core challenges of software assurance and cybersecurity transparency in the acquisition process, focusing primarily on software lifecycle activities.
+- **CSbDP** — CISA Secure by Design Pledge (v2024-05-08) — [link](https://www.cisa.gov/sites/default/files/2024-05/CISA%20Secure%20by%20Design%20Pledge_508c.pdf)
+
+  A voluntary pledge focused on seven goals to work towards, in addition to context and example approaches to achieve the goal and demonstrate measurable progress within enterprise software products and services.
+- **CSF** — NIST Cybersecurity Framework (v2.0) — [link](https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf)
+
+  The NIST Cybersecurity Framework (CSF) 2.0 provides guidance to industry, government agencies, and other organizations to manage cybersecurity risks. It offers a taxonomy of high level cybersecurity outcomes that can be used by any organization — regardless of its size, sector, or maturity — to better understand, assess, prioritize, and communicate its cybersecurity efforts. The CSF does not prescribe how outcomes should be achieved. Rather, it links to online resources that provide additional guidance on practices and controls that could be used to achieve those outcomes.
+- **DORA** — EU Digital Operational Resilience Act (DORA) (v2022-12-14) — [link](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R2554&from=FR)
+
+  On digital operational resilience for the financial sector and amending Regulations (EC) No 1060/2009, (EU) No 648/2012, (EU) No 600/2014, (EU) No 909/2014 and (EU) 2016/1011.
+- **MAF** — MITRE ATT&CK Framework (vv18) — [link](https://attack.mitre.org/)
+
+  A globally-accessible knowledge base of adversary tactics and techniques based on real-world observations.
+- **NIS2** — EU Network and Information Security Directive 2 (v2024-10-17) — [link](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202402690#tit_1)
+
+  Laying down rules for the application of Directive (EU) 2022/2555 as regards technical and methodological requirements of cybersecurity risk-management measures and further specification of the cases in which an incident is considered to be significant with regard to DNS service providers, TLD name registries, cloud computing service providers, data centre service providers, content delivery network providers, managed service providers, managed security service providers, providers of online market places, of online search engines and of social networking services platforms, and trust service providers.
+- **PCIDSS** — Payment Card Industry Data Security Standard (v4.0.1) — [link](https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf)
+
+  PCI Security Standards are technical and operational requirements set by the PCI Security Standards Council (PCI SSC) to protect cardholder data. The standards apply to all entities that store, process or transmit cardholder data – with requirements for software developers and manufacturers of applications and devices used in those transactions. The Council is responsible for managing the security standards, while compliance with the PCI set of standards is enforced by the founding members of the Council: American Express, Discover Financial Services, JCB, MasterCard and Visa Inc. The PCI Data Security Standard (PCI DSS) applies to all entities that store, process, and/or transmit cardholder data. It covers technical and operational system components included in or connected to cardholder data. If you accept or process payment cards, PCI DSS applies to you.
+- **PSSCRM** — Proactive Software Supply Chain Risk Management Framework (v1.0) — [link](https://arxiv.org/pdf/2404.12300)
+
+  The Proactive-Software Supply Chain Risk Management (P-SSCRM) Framework is designed to help you understand and plan a secure software supply chain risk management initiative. P-SSCRM was created through a process of understanding and analyzing real-world data from nine industry-leading software supply chain risk management initiatives as well as through the analysis and unification of ten government and industry documents, frameworks, and standards. Although individual methodologies and standards differ, many initiatives and standards share common ground. P-SSCRM describes this common ground and presents a model for understanding, quantifying, and developing a secure software supply chain risk management program and determining where your organization’s existing efforts stand when contrasted with other real-world software supply chain risk management initiatives.
+- **SAMM** — OWASP Software Assurance Maturity Model (v2.0) — [link](https://owaspsamm.org/model/)
+
+  The mission of OWASP Software Assurance Maturity Model (SAMM) is to be the prime maturity model for software assurance that provides an effective and measurable way for all types of organizations to analyze and improve their software security posture. OWASP SAMM supports the complete software lifecycle, including development and acquisition, and is technology and process agnostic. It is intentionally built to be evolutive and risk-driven in nature.
+- **Scorecard** — OpenSSF Scorecard (vv5.2.1) — [link](https://scorecard.dev/)
+- **SLSA** — Supply Chain Levels for Software Artifacts (v1.0) — [link](https://github.com/slsa-framework/slsa)
+
+  SLSA (pronounced "salsa") is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
+- **SSDF** — Secure Software Development Framework (v1.1) — [link](https://csrc.nist.gov/pubs/sp/800/218/final)
+
+  The Secure Software Development Framework (SSDF) is a set of fundamental, sound, and secure software development practices based on established secure software development practice documents from organizations such as BSA, OWASP, and SAFECode. Few software development life cycle (SDLC) models explicitly address software security in detail, so practices like those in the SSDF need to be added to and integrated with each SDLC implementation. Following the SSDF practices should help software producers reduce the number of vulnerabilities in released software, reduce the potential impact of the exploitation of undetected or unaddressed vulnerabilities, and address the root causes of vulnerabilities to prevent recurrences. Also, because the SSDF provides a common language for describing secure software development practices, software producers and acquirers can use it to foster their communications for procurement processes and other management activities.
+- **UKSSCOP** — United Kingdom National Cyber Security Centre Software Security Code of Practice (v2025-05-07) — [link](https://www.ncsc.gov.uk/guidance/software-security-code-of-practice-assurance-principles-claims)
+
+  The Software Code of Practice has been created by DSIT and the National Cyber Security Centre (NCSC), the UK’s technical authority for cyber security, and is co-sealed by the Canadian Centre for Cyber Security (CCCS). The Code reflects the government’s ongoing focus on codifying minimum standards for technology providers to reduce cyber risk. It is aimed at professionals who are responsible for overseeing the development of ‘commodity’ software, including technical, compliance, and risk experts. For those organisations that require a higher level of assurance in the resilience of their connected products and technology, consider using the NCSC’s Cyber Resilience Testing scheme.
+- **USCTM** — US Cyber Trust Mark (v2023-07-18) — [link](https://www.fcc.gov/CyberTrustMark)
+
+  A voluntary cybersecurity labeling program for wireless consumer IoT products.
+
+## Lexicon
+
+### Administrator
+
+Any human who can modify settings on the target resource.
+
+### Arbitrary Code
+
+Code provided by an external source that is
+executed by a system without validation or
+restriction.
+
+### Attack Surface Analysis
+
+Attack Surface Analysis is about mapping out what parts of a system need to
+be reviewed and tested for security vulnerabilities. The point of Attack
+Surface Analysis is to understand the risk areas in an application, to make
+developers and security specialists aware of what parts of the application
+are open to attack, to find ways of minimizing this, and to notice when and
+how the Attack Surface changes and what this means from a risk perspective.
+
+See OWASP's Attack Surface Analysis Cheat Sheet for more information.
+**References:**
+- [https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html](https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html)
+
+### Automated Test Suite
+
+A collection of pre-written test cases that, when invoked,
+execute the software to verify that actual results are expected results
+without requiring manual intervention.
+An automated test suite must return an overall "pass" or "fail" result,
+and is often implemented using a test framework.
+Common ways to invoke automated tests include `make check`, `make test`, `npm test`, and `cargo test` manually or as part of a Continuous Integration workflow.
+
+### Best Practices Badge
+
+The OpenSSF Best Practices Badge Identifies FLOSS best practices & implements a badging system for those practices.
+**References:**
+- [https://www.bestpractices.dev/en](https://www.bestpractices.dev/en)
+
+### Build and Release Pipeline
+
+A series of automated processes that compile
+and deploy software. Similar to the generic
+term CI/CD Pipelines, but this term excludes
+some pipelines, such as pre-merge status
+checks.
+
+### Code
+
+A set of deterministic instructions that a
+computer can execute to perform specific tasks.
+
+### Change
+
+Any alteration of the project's codebase,
+CI/CD Pipelines, or documentation. This may
+include addition, deletion, or modification
+of content.
+
+### CI/CD Pipeline
+
+Automated pipelines for Continuous
+Integration and Continuous Delivery.
+Responsible for building, testing, and
+delivering changes. These pipelines integrate
+contributions frequently, enabling rapid and
+reliable software delivery. CI focuses on
+testing and building code, while CD delivers
+software to location such as a package
+registry.
+
+In the context of the Open Source Project
+Security Baseline, CD refers only to
+continuous delivery, not to continuous
+deployment, as sometimes used elsewhere.
+
+### Contributor License Agreement
+
+A legal agreement used to assign some of a contributor's
+rights covered by copyright laws to a project. This is
+often used to enable a project to make future changes to
+a work's license without requiring the assent of every
+contributor.
+
+### Contributor
+
+Any entity that has made a change to the contents of a repository.
+
+### Collaborator
+
+Any entity who has any level of permissions issued by administrators
+of the repository.
+
+### Commit
+
+A record of a single change submitted to the
+version control system. Each commit includes
+details such as the modifications made, the
+contributor who made them, and the timestamp
+of the change.
+
+### Coordinated Vulnerability Disclosure
+
+A process of gathering information from vulnerability finders, coordinating
+the sharing of that information between relevant stakeholders, and
+disclosing the existence of software vulnerabilities and their mitigations
+to various stakeholders including the public.
+**References:**
+- [https://certcc.github.io/CERT-Guide-to-CVD/](https://certcc.github.io/CERT-Guide-to-CVD/)
+- [https://www.first.org/global/sigs/vulnerability-coordination/multiparty/guidelines-v1-1](https://www.first.org/global/sigs/vulnerability-coordination/multiparty/guidelines-v1-1)
+- [https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/about-coordinated-disclosure-of-security-vulnerabilities](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/about-coordinated-disclosure-of-security-vulnerabilities)
+
+### Cyber Resilience Act
+
+Regulation (EU) 2024/2847 (Cyber Resilience Act, CRA).
+2024 European cybersecurity law that goes into full effect
+December 2027.  Focuses on products sold within the European
+Union and the cybersecurity and vulnerability management
+practices used to create and support the product.
+**References:**
+- [https://eur-lex.europa.eu/eli/reg/2024/2847/oj](https://eur-lex.europa.eu/eli/reg/2024/2847/oj)
+
+### Cybersecurity Framework
+
+The NIST Cyber Security Framework (CSF) helps organizations understand and improve their management of cybersecurity risk.
+**References:**
+- [https://www.nist.gov/cyberframework](https://www.nist.gov/cyberframework)
+- [https://doi.org/10.6028/NIST.CSWP.29](https://doi.org/10.6028/NIST.CSWP.29)
+
+### Defect
+
+Errors or flaws in the software that cause it
+to produce incorrect or unintended results, 
+or to behave in an unintended way. Defects
+can include bugs, vulnerabilities, or other
+issues that impact the software's
+functionality or security. Defects may have
+originally been intentional, but a change in
+environment or understanding has made them
+undesirable.
+
+### Developer Certificate of Origin
+
+An assertion made by a contributor that they have the
+legal right to make a specific contribution to a
+project. This is often indicated by using the
+`--signoff` option to `git commit`.
+**References:**
+- [https://developercertificate.org/](https://developercertificate.org/)
+
+### OpenEoX
+
+An initiative aimed at standardizing the way
+End-of-Life and End-of-Support information is 
+exchanged within the software and hardware industries.
+Covering both vendors and open-source maintainers,
+OpenEoX strives to provide a transparent, efficient, 
+and unified approach to managing product lifecycles.
+**References:**
+- [https://openeox.org/](https://openeox.org/)
+
+### Exploitable Vulnerabilities
+
+Defects in the software that can be leveraged
+by attackers to gain unauthorized access,
+execute arbitrary code, or cause other
+undesired outcomes.
+
+### License
+
+A legal document that defines the terms under
+which the software can be used, modified, and
+distributed. May be stored at the top level
+of the repository in a file named `LICENSE`
+or within files in a directory named
+`LICENSE/`. The license applies to repository
+contents and any released software assets,
+unless otherwise stated.
+
+### Known Vulnerabilities
+
+Publicly acknowledged exploitable
+vulnerabilities that have been identified
+within the software. These vulnerabilities
+often have associated advisories, patches, or
+recommended mitigations.
+
+All proposed changes to the project's
+codebase must be automatically evaluated 
+against a documented policy for known
+vulnerabilities and blocked in the
+event of violations.
+
+### Maintainer
+
+A human collaborator who is able to authorize
+changes to the contents of a repository.
+
+### Multi-factor Authentication
+
+An authentication method that requires two or
+more verification factors (e.g., a password
+and a token) to gain access to a resource.
+This method strengthens security by requiring
+multiple forms of identification.
+
+### NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations
+
+Provides guidance to organizations on identifying, 
+assessing, and mitigating cybersecurity risks throughout 
+the supply chain at all levels of their organizations.
+**References:**
+- [https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-161r1-upd1.pdf](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-161r1-upd1.pdf)
+
+### OpenChain
+
+A Linux Foundation project that oversee two ISO/IEC standards to better understand and manage software supply chains.
+**References:**
+- [https://openchainproject.org/](https://openchainproject.org/)
+- [https://openchainproject.org/license-compliance](https://openchainproject.org/license-compliance)
+
+### OpenCRE
+
+An OWASP project that converts cybersecurity requirements into a hierarchical, machine-readable format.
+**References:**
+- [https://www.opencre.org/](https://www.opencre.org/)
+- [https://zeljkoobrenovic.github.io/opencre-explorer/](https://zeljkoobrenovic.github.io/opencre-explorer/)
+
+### OpenSSF Scorecard
+
+An OpenSSF project that helps users assesses open 
+source projects for security risks through a series 
+of automated checks. It was created by OSS developers 
+to help improve the health of critical projects
+that the community depends on.
+**References:**
+- [https://github.com/ossf/scorecard](https://github.com/ossf/scorecard)
+- [https://scorecard.dev/](https://scorecard.dev/)
+
+### Payment Card Industry Data Security Standard
+
+PCI DSS provides a baseline of technical and operational 
+requirements designed to protect payment account data.
+**References:**
+- [https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf](https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf)
+
+### Primary Branch
+
+The main development branch in the version
+control system, representing the latest
+stable codebase. Releases are typically made
+from this branch. Commonly named `main` or
+`master`. In some situations where branches
+are not featured, a repository with forked
+repositories will have the original repo
+acting as an equivalent to the primary
+branch.
+
+### Private Vulnerability Reporting
+
+The process of privately reporting a
+vulnerability to the project maintainers or
+security team before disclosing it publicly.
+This allows the project to address the issue
+before it becomes widely known.
+**References:**
+- [https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability)
+
+### Proactive Software Supply Chain Risk Management Framework
+
+A holistic framework that an organization can use to 
+proactively mitigate software supply chain risk through 
+guided adoption of tasks; and that supports assessment,
+scoring, and comparison against industry peers, 
+standards, and guidelines. The P-SSCRM contextualizes and
+quantifies the tasks contained across multiple standards 
+and frameworks to those carried out by various kinds of organizations.
+**References:**
+- [https://arxiv.org/pdf/2404.12300](https://arxiv.org/pdf/2404.12300)
+
+### Project
+
+A group of people and resources that coordinate to
+produce a release.
+
+### Project Documentation
+
+Written materials related to the project,
+such as user guides, developer guides, and
+contribution guidelines. These documents help
+users and developers understand, contribute
+to, and interact with the software. At
+release time, this may include provenance
+information, licensing details, and other
+metadata.
+
+### OWASP Software Assurance Maturity Model
+
+A maturity model for software assurance that provides an 
+effective and measurable way for all types of organizations 
+to analyze and improve their software security posture. 
+OWASP SAMM supports the complete software lifecycle, including 
+development and acquisition, and is technology and process agnostic. 
+It is intentionally built to be evolutive and risk-driven in nature.
+**References:**
+- [https://owaspsamm.org/model/](https://owaspsamm.org/model/)
+
+### Sensitive Data
+
+Information that, if disclosed to unauthorized
+parties, would lead to unauthorized access,
+data exfiltration, financial loss, or other
+undesirable outcomes. This includes secrets
+(like passwords, access tokens, etc.),
+financial account information, personally
+identifiable information (PII), and data about
+embargoed vulnerabilities.
+
+### Sensitive Resource
+
+Resources that, if compromised, would provide a
+vector for further compromising software build
+and delivery or for disclosing sensitive data to
+unauthorized parties. This includes build systems,
+image repositories, and data storage.
+
+### Software Provenance
+
+Information about the origin and history of
+the released software assets. This may
+include details about its development,
+dependencies, vulnerabilities, contributors,
+and licensing.
+
+### Release
+
+- _(verb)_ The process of making a
+version-controlled bundle of assets available
+to users, such as through a package registry.
+- _(noun)_  A version-controlled bundle of
+assets made available to users.
+
+### Released Software Asset
+
+Deliverables provided to users as part of a
+release. These assets can include binaries,
+libraries, or containers.
+
+### Repository
+
+A storage location managed by a version control
+system where the project's code, documentation,
+and other resources are stored.
+
+### Secure Software Development Framework
+
+The NIST Secure Software Development Framework (SP 800-218) is a 
+broadly reviewed and collaborative set of fundamental secure software 
+development practices.
+**References:**
+- [https://csrc.nist.gov/projects/ssdf](https://csrc.nist.gov/projects/ssdf)
+- [https://csrc.nist.gov/pubs/sp/800/218/final](https://csrc.nist.gov/pubs/sp/800/218/final)
+
+### Software Bill of Materials
+
+A list of all components that make up a given piece of software
+or hardware, formatted as CycloneDX or SPDX. This list must include
+the following data elements for the components included in the released
+software asset: license, supplier name, filename of the component,
+component name, component version, software identifiers, relationship
+between the components, author of the SBOM data and timestamp. Additionally,
+for deployable and executable components, the SBOM should record their
+cryptographic hashes.
+**References:**
+- [https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf](https://www.ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)
+- [https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf](https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf)
+- [https://spdx.dev](https://spdx.dev)
+- [https://cyclonedx.org](https://cyclonedx.org)
+
+### Software Composition Analysis
+
+The process of identifying and cataloging all
+components and dependencies in a software
+codebase. SCA is essential for managing
+security vulnerabilities and ensuring
+compliance with organizational policies.
+
+### Status Check
+
+Automated tests or validations that run on
+commits before they are merged. Status checks
+ensure that any changes meet the project's
+quality and security standards.
+
+### Subproject
+
+A codebase that is part of the project but
+maintained in a separate repository.
+Subprojects may be compiled into the primary
+project or used as standalone components.
+
+### Supply-chain Levels for Software Artifacts
+
+An OpenSSF project that sets guidelines for securing software supply chain infrastructure and artifact integrity.
+**References:**
+- [https://openssf.org/projects/slsa/](https://openssf.org/projects/slsa/)
+- [https://slsa.dev/](https://slsa.dev/)
+
+### Threat Modeling
+
+Threat modeling is an activity where the project
+looks at the codebase, associated processes and 
+infrastructure, interfaces, key components and 
+"thinks like a hacker" to brainstorm how the 
+system be be broken or compromised.
+
+Each identified threat is listed out so the project
+can then think about how to proactively avoid or 
+close off any gaps/vulnerabilities that could arise.
+
+Examples of threat modeling methodologies include
+the Shostack "4 Questions" model, STRIDE, and
+tools such as the Elevation of Privilege Threat
+Modeling Card Game or Threat Dragon.
+**References:**
+- [https://github.com/adamshostack/4QuestionFrame](https://github.com/adamshostack/4QuestionFrame)
+- [https://owasp.org/www-community/Threat_Modeling_Process](https://owasp.org/www-community/Threat_Modeling_Process)
+- [https://www.microsoft.com/en-us/download/details.aspx?id=20303](https://www.microsoft.com/en-us/download/details.aspx?id=20303)
+- [https://owasp.org/www-project-threat-dragon](https://owasp.org/www-project-threat-dragon)
+
+### Version Identifier
+
+A label assigned to a specific release of the
+software, such as `v1.2.3`. Commonly
+recommended formats are Semantic Versioning
+or Calendar Versioning.
+
+### User
+
+A human making use of project resources, such as
+the software, documentation, or other community
+resources. This includes both end-users and
+contributors.
+
+### Version Control System
+
+A tool that facilitates collaboration among
+contributors by tracking changes, managing
+collaborator permissions, and providing configuration
+options. Examples of version control systems include
+Git, Subversion, and Mercurial.
+
+### Vulnerability Reporting
+
+The act of identifying and documenting
+exploitable vulnerabilities in released
+software assets. This may include privately
+or openly reporting vulnerabilities to
+maintainers, security teams, or the public,
+as well as tracking the resolution of these
+vulnerabilities.
+**References:**
+- [https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability)
+
+[Administrator]: #administrator
+[Arbitrary Code]: #arbitrary-code
+[Attack Surface Analysis]: #attack-surface-analysis
+[Automated Test Suite]: #automated-test-suite
+[Best Practices Badge]: #best-practices-badge
+[Build and Release Pipeline]: #build-and-release-pipeline
+[Code]: #code
+[Change]: #change
+[CI/CD Pipeline]: #ci-cd-pipeline
+[Contributor License Agreement]: #contributor-license-agreement
+[Contributor]: #contributor
+[Collaborator]: #collaborator
+[Commit]: #commit
+[Coordinated Vulnerability Disclosure]: #coordinated-vulnerability-disclosure
+[Cyber Resilience Act]: #cyber-resilience-act
+[Cybersecurity Framework]: #cybersecurity-framework
+[Defect]: #defect
+[Developer Certificate of Origin]: #developer-certificate-of-origin
+[OpenEoX]: #openeox
+[Exploitable Vulnerabilities]: #exploitable-vulnerabilities
+[License]: #license
+[Known Vulnerabilities]: #known-vulnerabilities
+[Maintainer]: #maintainer
+[Multi-factor Authentication]: #multi-factor-authentication
+[NIST Special Publication 800-161 - Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations]: #nist-special-publication-800-161---cybersecurity-supply-chain-risk-management-practices-for-systems-and-organizations
+[OpenChain]: #openchain
+[OpenCRE]: #opencre
+[OpenSSF Scorecard]: #openssf-scorecard
+[Payment Card Industry Data Security Standard]: #payment-card-industry-data-security-standard
+[Primary Branch]: #primary-branch
+[Private Vulnerability Reporting]: #private-vulnerability-reporting
+[Proactive Software Supply Chain Risk Management Framework]: #proactive-software-supply-chain-risk-management-framework
+[Project]: #project
+[Project Documentation]: #project-documentation
+[OWASP Software Assurance Maturity Model]: #owasp-software-assurance-maturity-model
+[Sensitive Data]: #sensitive-data
+[Sensitive Resource]: #sensitive-resource
+[Software Provenance]: #software-provenance
+[Release]: #release
+[Released Software Asset]: #released-software-asset
+[Repository]: #repository
+[Secure Software Development Framework]: #secure-software-development-framework
+[Software Bill of Materials]: #software-bill-of-materials
+[Software Composition Analysis]: #software-composition-analysis
+[Status Check]: #status-check
+[Subproject]: #subproject
+[Supply-chain Levels for Software Artifacts]: #supply-chain-levels-for-software-artifacts
+[Threat Modeling]: #threat-modeling
+[Version Identifier]: #version-identifier
+[User]: #user
+[Version Control System]: #version-control-system
+[Vulnerability Reporting]: #vulnerability-reporting
+

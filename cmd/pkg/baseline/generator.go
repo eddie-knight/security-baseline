@@ -22,15 +22,6 @@ func NewGenerator() *Generator {
 
 type Generator struct{}
 
-// ExportMarkdown runs the baseline data through the markdown template at templatePath.
-func (g *Generator) ExportMarkdown(b *types.Baseline, templatePath, path string) error {
-	templateContent, err := os.ReadFile(templatePath)
-	if err != nil {
-		return fmt.Errorf("error reading markdown template: %w", err)
-	}
-	return g.renderMarkdown(b, "", string(templateContent), path)
-}
-
 // ExportMarkdownDevel renders the baseline using the embedded devel template.
 func (g *Generator) ExportMarkdownDevel(b *types.Baseline, path string) error {
 	return g.renderMarkdown(b, "", develTemplateContent, path)

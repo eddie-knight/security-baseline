@@ -67,7 +67,6 @@ After running, review the diff, update docs/release_notes.md, then open a PR.`,
 				}
 			}
 
-			// Load and validate
 			loader := baseline.NewLoader()
 			loader.DataPath = baselinePath
 			bline, err := loader.Load()

@@ -1,12 +1,10 @@
 module github.com/ossf/security-baseline
 
-go 1.24.0
-
-toolchain go1.24.1
+go 1.25.0
 
 require (
 	github.com/defenseunicorns/go-oscal v0.7.0
-	github.com/gemaraproj/go-gemara v0.0.2
+	github.com/gemaraproj/go-gemara v0.1.1
 	github.com/goccy/go-yaml v1.19.2
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
@@ -26,4 +24,4 @@ require (
 )
 
 // Local dev: sibling clone at ../../go-gemara (parent of repo + go-gemara). CI checks out there via path: ../go-gemara. Or pin to a published module once CatalogToMarkdown is released.
-replace github.com/gemaraproj/go-gemara => ../../go-gemara
+// replace github.com/gemaraproj/go-gemara => ../../go-gemara

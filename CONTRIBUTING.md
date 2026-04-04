@@ -11,6 +11,51 @@ The baseline is published to https://baseline.openssf.org/ (via GitHub Pages) vi
 Jekyll (a static site generator) using scripts from `./cmd` and formatting from
 `./docs`, using GitHub Actions.
 
+The `baseline-compiler` tool in `cmd/` has three commands:
+
+* **compile**: Load, validate, and render the baseline to all output formats
+* **validate**: Validate the baseline YAML data files
+* **release**: Generate all release artifacts and update site documentation
+
+All commands take `--baseline` / `-b` to specify the baseline data directory (defaults to `../baseline` when run from `cmd/`). Use `make` targets from the repo root:
+
+```bash
+make compile                     # render all output formats (dev/preview)
+make validate                    # validate the baseline YAML
+make release VERSION=2026-04-04  # generate a new release (see below)
+```
+
+### compile
+
+Loads and validates the baseline, then writes all outputs to conventional paths relative to the repo root:
+
+- `docs/versions/devel.md` — markdown for the dev site
+- `docs/versions/devel-checklist.md` — printable checklist
+- `build/baseline.gemara.yaml` — Gemara YAML (validated by CI against the CUE schema)
+- `build/baseline.oscal.json` — OSCAL JSON (validated by CI against the NIST schema)
+
+The `go.mod` in `cmd/` uses `replace github.com/gemaraproj/go-gemara => ../../go-gemara`. That path is **relative to `cmd/go.mod`**: one `..` is the repo root, two `..` is the parent directory, so the clone lives next to the repo as a **sibling** (e.g. `projects/go-gemara` beside `projects/security-baseline`). No symlink is required. CI checks out [gemaraproj/go-gemara](https://github.com/gemaraproj/go-gemara) to `../go-gemara` relative to the workspace so the same layout applies.
+
+### validate
+
+Loads and validates the baseline YAML data files, printing a summary on success.
+
+### release
+
+To publish a new version of the baseline, run from the repo root:
+
+```bash
+make release VERSION=<YYYY-MM-DD>
+```
+
+This generates `docs/versions/<VERSION>.md` and `docs/versions/<VERSION>-checklist.md`,
+demotes the previous current version, and updates `docs/_config.yml` and `docs/index.md`.
+After running, review the diff, update `docs/release_notes.md`, then open a PR.
+
+### validate
+
+This command validates the correctness of the OSPS Baseline input.
+
 ## PR guidelines
 
 All changes to the repository should be made via PR

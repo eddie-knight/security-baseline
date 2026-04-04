@@ -56,66 +56,7 @@ Each Assessment Requirement has:
 
 ## baseline-compiler
 
-The Security Baseline SIG maintains a Golang tool for validating and rendering Baseline controls. It includes the following commands:
-
-* [compile](#compile): Compile a YAML file of security controls
-* completion  Generate the autocompletion script for the specified shell
-* help        Help about any command
-* [gemara](#gemara): Export the assembled ControlCatalog as Gemara YAML or Markdown (via [go-gemara](https://github.com/gemaraproj/go-gemara) `gemaraconv`)
-* [oscal](#oscal): Write the Baseline definition to an OSCAL json catalog
-* [validate](#validate): Validate the baseline data files
-
-From the `cmd/` directory, run `go run . [command] [arguments]`
-
-### compile
-
-This command reads the YAML data describing the Baseline controls in `/baseline` and generates two optional Markdown files: a listing of all OSPS Baseline controls for use in a static site generator and a checklist of controls by level.
-
-To produce a file for use in a static site generator (which is how we create baseline.openssf.org!), specify a file argument to `--output`.
-
-To produce a checklist file to use as an aid to evaluating your project's conformance to OSPS Baseline, specify a file argument to `--checklist-output`.
-
-Use the `--help` flag for more options.
-
-### gemara
-
-This command assembles the YAML under `/baseline` into a single Gemara `ControlCatalog` and writes **Gemara YAML** by default (for `cue vet` and other tooling). With **`--markdown`**, it instead renders the catalog to **Markdown** using [`gemaraconv.CatalogToMarkdown`](https://pkg.go.dev/github.com/gemaraproj/go-gemara/gemaraconv#CatalogToMarkdown) from [go-gemara](https://github.com/gemaraproj/go-gemara).
-
-**Lexicon:** `baseline/lexicon.yaml` is always folded into Markdown export (autolinked terms plus a trailing **`## Lexicon`** glossary). **`--markdown-lexicon`** is only when the catalog declares **`metadata.lexicon`** and you want to load a **Gemara `Lexicon`** YAML artifact from `metadata.mapping-references` instead (that path overrides the inline list).
-
-Examples:
-
-```bash
-cd cmd
-go run . gemara -b ../baseline -o ../build/baseline.gemara.yaml
-go run . gemara -b ../baseline --markdown -o ../build/baseline.md
-```
-
-Markdown export includes an **assessment-requirement × Requirements and Applicability matrix** (one row per requirement) by default. Markdown-only flags (each requires **`--markdown`**):
-
-| Flag | Effect |
-| :--- | :--- |
-| **`--no-toc`** | Omit the table of contents. |
-| **`--no-applicability-matrix`** | Omit the requirement × Requirements and Applicability matrix. |
-| **`--markdown-lexicon`** | Use `metadata.lexicon` + `metadata.mapping-references` to fetch **Gemara `Lexicon`** YAML (remote/file URL) for autolink + glossary, **instead of** `baseline/lexicon.yaml`. Requires `metadata.lexicon` to be set; otherwise this flag is a no-op. |
-
-Example combining options:
-
-```bash
-go run . gemara -b ../baseline --markdown --no-toc --markdown-lexicon -o ../build/baseline.md
-```
-
-The `go.mod` in `cmd/` uses `replace github.com/gemaraproj/go-gemara => ../../go-gemara`. That path is **relative to `cmd/go.mod`**: one `..` is the repo root, two `..` is the parent directory, so the clone lives next to the repo as a **sibling** (e.g. `projects/go-gemara` beside `projects/security-baseline`). No symlink is required. CI checks out [gemaraproj/go-gemara](https://github.com/gemaraproj/go-gemara) to `../go-gemara` relative to the workspace so the same layout applies. If you need a fork or branch that includes `CatalogToMarkdown`, set the checkout `ref` in `.github/workflows/cue-validate.yaml`.
-
-### oscal
-
-This command reads the YAML OSPS Baseline data files and translates the catalog of controls into [OSCAL](https://pages.nist.gov/OSCAL/) format. It writes the JSON output to STDOUT by default. You can specify a file with `--out`.
-
-Use the `--help` flag for more options.
-
-### validate
-
-This command validates the correctness of the OSPS Baseline input.
+The Security Baseline SIG maintains a Golang tool for validating and rendering Baseline controls. See [CONTRIBUTING.md](CONTRIBUTING.md#contributing-to-the-tooling) for build and release instructions.
 
 ## Contribution, Governance, & Security
 

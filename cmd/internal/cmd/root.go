@@ -21,10 +21,9 @@ func Execute() error {
 	}
 
 	// Add the subcommands
+	addRelease(rootCmd)
 	addCompile(rootCmd)
 	addValidate(rootCmd)
-	addOscal(rootCmd)
-	addGemara(rootCmd)
 
 	return rootCmd.Execute()
 }

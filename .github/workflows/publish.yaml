@@ -19,7 +19,7 @@ on:
         type: boolean
         default: true
       version:
-        description: "Version stamped on every artifact, and the OCI tag. Required for manual runs."
+        description: "Version stamped on every artifact, and the OCI tag. Required for manual runs. An existing release tag re-publishes that tag's content as non-draft; anything else publishes the current branch as a draft."
         type: string
 
 permissions:
@@ -42,7 +42,8 @@ jobs:
       cancel-in-progress: false
     env:
       RELEASE_VERSION: ${{ github.event.release.tag_name || inputs.version }}
-      # If a version is manually typed instead of targeting an existing tag, the artifact is tagged as "draft"
+      # A manually typed version that doesn't name an existing tag publishes a
+      # draft; the re-publish step below flips this when the tag exists.
       ARTIFACT_DRAFT: ${{ github.event.release.tag_name && 'false' || 'true' }}
       HUB_URL: https://hub.grc.store
       DRY_RUN_FLAGS: ${{ inputs.dry_run && '--dry-run --no-sign' || '' }}
@@ -60,6 +61,19 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      # A dispatched version naming an existing tag is a re-publish of that
+      # release, not a draft: build the tag's content, not the dispatch ref's,
+      # and drop the draft flag. Runs main's workflow either way, so fixes to
+      # this file apply when re-publishing an older tag.
+      - name: Check out the tag when re-publishing an existing release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          if git ls-remote --exit-code origin "refs/tags/$RELEASE_VERSION" > /dev/null; then
+            git fetch --depth=1 origin "refs/tags/$RELEASE_VERSION:refs/tags/$RELEASE_VERSION"
+            git checkout "refs/tags/$RELEASE_VERSION"
+            echo "ARTIFACT_DRAFT=false" >> "$GITHUB_ENV"
+          fi
 
       # Shared with cue-validate.yaml — the CUE gate must not drift between the
       # workflow that checks a PR and the one that publishes.

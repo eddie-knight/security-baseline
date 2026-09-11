@@ -85,7 +85,7 @@ jobs:
 
       - name: Install grcli
         run: |
-          oras pull ghcr.io/gemaraproj/grcli@sha256:9e668b4a5a6bc93c48190f2495911e20276bbc3dff9d9e0b0de35a859b69ca5f --platform linux/amd64
+          oras pull ghcr.io/gemaraproj/grcli@sha256:05c341a5249fdde35eafea5aceea77fca45eae50d425d7be365d44e4f2801801 --platform linux/amd64
           sudo install grcli /usr/local/bin/grcli
 
       # One grcli invocation per artifact: positional args to `publish` describe

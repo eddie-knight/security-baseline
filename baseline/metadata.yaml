@@ -7,7 +7,7 @@ metadata:
     The Open Source Project Security (OSPS) Baseline is a set of security criteria that projects should meet to demonstrate a strong security posture.
   draft: true
   author:
-    id: openssf
+    id: gemara-test
     name: OSPS Baseline Authors
     type: Human
   applicability-groups:
